@@ -1,0 +1,1218 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Carona Acadêmica</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  <style>
+    body { font-family: "Inter", sans-serif; }
+    body.theme-dark {
+      color-scheme: dark;
+      background:
+        radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 28%),
+        radial-gradient(circle at 85% 15%, rgba(16, 185, 129, 0.12), transparent 20%),
+        linear-gradient(180deg, #020617 0%, #0f172a 45%, #111827 100%);
+      color: #e2e8f0;
+    }
+    body.theme-dark .bg-slate-50 { background-color: rgba(15, 23, 42, 0.86) !important; }
+    body.theme-dark .bg-slate-100 { background-color: rgba(30, 41, 59, 0.78) !important; }
+    body.theme-dark .bg-slate-200 { background-color: rgba(51, 65, 85, 0.92) !important; }
+    body.theme-dark .bg-white {
+      background-color: rgba(15, 23, 42, 0.74) !important;
+      backdrop-filter: blur(18px);
+    }
+    body.theme-dark .border-slate-50 { border-color: rgba(30, 41, 59, 0.5) !important; }
+    body.theme-dark .border-slate-100 { border-color: rgba(51, 65, 85, 0.72) !important; }
+    body.theme-dark .border-slate-200 { border-color: rgba(71, 85, 105, 0.85) !important; }
+    body.theme-dark .text-slate-800 { color: #f8fafc !important; }
+    body.theme-dark .text-slate-700 { color: #e2e8f0 !important; }
+    body.theme-dark .text-slate-600 { color: #cbd5e1 !important; }
+    body.theme-dark .text-slate-500 { color: #94a3b8 !important; }
+    body.theme-dark .text-slate-400 { color: #64748b !important; }
+    body.theme-dark .bg-blue-50 { background-color: rgba(29, 78, 216, 0.18) !important; }
+    body.theme-dark .bg-blue-100 { background-color: rgba(37, 99, 235, 0.28) !important; }
+    body.theme-dark .bg-emerald-50 { background-color: rgba(5, 150, 105, 0.16) !important; }
+    body.theme-dark .bg-emerald-100 { background-color: rgba(5, 150, 105, 0.24) !important; }
+    body.theme-dark .bg-amber-50 { background-color: rgba(217, 119, 6, 0.16) !important; }
+    body.theme-dark .bg-amber-100 { background-color: rgba(217, 119, 6, 0.24) !important; }
+    body.theme-dark .bg-red-50 { background-color: rgba(220, 38, 38, 0.14) !important; }
+    body.theme-dark .bg-red-100 { background-color: rgba(220, 38, 38, 0.24) !important; }
+    body.theme-dark .bg-violet-50 { background-color: rgba(124, 58, 237, 0.16) !important; }
+    body.theme-dark .bg-violet-100 { background-color: rgba(124, 58, 237, 0.24) !important; }
+    body.theme-dark .bg-rose-50 { background-color: rgba(225, 29, 72, 0.14) !important; }
+    body.theme-dark .bg-rose-100 { background-color: rgba(225, 29, 72, 0.22) !important; }
+    body.theme-dark .text-blue-700 { color: #93c5fd !important; }
+    body.theme-dark .text-blue-600 { color: #60a5fa !important; }
+    body.theme-dark .text-emerald-700 { color: #6ee7b7 !important; }
+    body.theme-dark .text-emerald-600 { color: #34d399 !important; }
+    body.theme-dark .text-amber-700 { color: #fbbf24 !important; }
+    body.theme-dark .text-amber-600 { color: #f59e0b !important; }
+    body.theme-dark .text-red-700 { color: #fca5a5 !important; }
+    body.theme-dark .text-red-600 { color: #f87171 !important; }
+    body.theme-dark .text-violet-700 { color: #c4b5fd !important; }
+    body.theme-dark .text-violet-600 { color: #a78bfa !important; }
+    body.theme-dark .text-rose-700 { color: #fda4af !important; }
+    body.theme-dark .text-rose-600 { color: #fb7185 !important; }
+    body.theme-dark .shadow-sm { box-shadow: 0 18px 45px rgba(2, 6, 23, 0.22) !important; }
+    body.theme-dark .hover\:bg-slate-50:hover { background-color: rgba(30, 41, 59, 0.62) !important; }
+    body.theme-dark .hover\:bg-slate-100:hover { background-color: rgba(51, 65, 85, 0.86) !important; }
+    body.theme-dark .hover\:bg-slate-200:hover { background-color: rgba(71, 85, 105, 0.86) !important; }
+    body.theme-dark .hover\:bg-blue-100:hover { background-color: rgba(37, 99, 235, 0.34) !important; }
+    body.theme-dark .hover\:bg-emerald-100:hover { background-color: rgba(5, 150, 105, 0.3) !important; }
+    body.theme-dark .hover\:bg-red-50:hover { background-color: rgba(220, 38, 38, 0.2) !important; }
+    body.theme-dark .hover\:bg-red-100:hover { background-color: rgba(220, 38, 38, 0.3) !important; }
+    body.theme-dark .hover\:bg-amber-100:hover { background-color: rgba(217, 119, 6, 0.3) !important; }
+    .scrollbar-thin::-webkit-scrollbar { width: 4px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: rgba(30, 41, 59, 0.45); }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.65); border-radius: 999px; }
+    @media print {
+      body { background: white; }
+      body.theme-dark,
+      body.theme-dark .bg-slate-50,
+      body.theme-dark .bg-slate-100,
+      body.theme-dark .bg-white,
+      body.theme-dark .bg-blue-50,
+      body.theme-dark .bg-emerald-50,
+      body.theme-dark .bg-amber-50,
+      body.theme-dark .bg-red-50,
+      body.theme-dark .bg-violet-50,
+      body.theme-dark .bg-rose-50 {
+        background: white !important;
+        color: #0f172a !important;
+        box-shadow: none !important;
+        backdrop-filter: none !important;
+      }
+      body.theme-dark .text-slate-800,
+      body.theme-dark .text-slate-700,
+      body.theme-dark .text-slate-600,
+      body.theme-dark .text-slate-500,
+      body.theme-dark .text-slate-400,
+      body.theme-dark .text-blue-700,
+      body.theme-dark .text-blue-600,
+      body.theme-dark .text-emerald-700,
+      body.theme-dark .text-emerald-600,
+      body.theme-dark .text-amber-700,
+      body.theme-dark .text-amber-600,
+      body.theme-dark .text-red-700,
+      body.theme-dark .text-red-600,
+      body.theme-dark .text-violet-700,
+      body.theme-dark .text-violet-600,
+      body.theme-dark .text-rose-700,
+      body.theme-dark .text-rose-600 { color: #0f172a !important; }
+      body.theme-dark .border-slate-100,
+      body.theme-dark .border-slate-200,
+      body.theme-dark .border-slate-50 { border-color: #e2e8f0 !important; }
+      .no-print { display: none !important; }
+      .print-full { max-width: 100% !important; padding: 0 !important; }
+    }
+  </style>
+</head>
+<body class="theme-dark bg-slate-50 min-h-screen">
+<div id="root"></div>
+<script type="text/babel">
+const { useState, useEffect, useMemo, useRef } = React;
+
+function dateStr(d) { return d.toISOString().split("T")[0]; }
+function parseDate(str) { return new Date(str + "T00:00:00"); }
+function formatDate(str) { return parseDate(str).toLocaleDateString("pt-BR", { day:"2-digit", month:"2-digit", year:"numeric" }); }
+function formatDateShort(str) { return parseDate(str).toLocaleDateString("pt-BR", { day:"2-digit", month:"2-digit" }); }
+function getDayOfWeek(str) { return parseDate(str).getDay(); }
+function uuid() { return Math.random().toString(36).slice(2) + Date.now().toString(36); }
+function stddev(arr) {
+  if (!arr.length) return 0;
+  const mean = arr.reduce((a,b)=>a+b,0)/arr.length;
+  return Math.sqrt(arr.reduce((s,v)=>s+Math.pow(v-mean,2),0)/arr.length);
+}
+
+// --- FERIADOS NACIONAIS (BR) ---
+function getHolidaysForYear(year) {
+  const fixed = [
+    [1,1,"Confraternizacao Universal"],[4,21,"Tiradentes"],[5,1,"Dia do Trabalho"],
+    [9,7,"Independencia do Brasil"],[10,12,"N. Sra. Aparecida"],[11,2,"Finados"],
+    [11,15,"Proclamacao da Republica"],[11,20,"Consciencia Negra"],[12,25,"Natal"],
+  ];
+  const a=year%19,b=Math.floor(year/100),c=year%100,d=Math.floor(b/4),e=b%4,
+        f=Math.floor((b+8)/25),g=Math.floor((b-f+1)/3),h=(19*a+b-d-g+15)%30,
+        i=Math.floor(c/4),k=c%4,l=(32+2*e+2*i-h-k)%7,
+        m=Math.floor((a+11*h+22*l)/451);
+  const easterMonth=Math.floor((h+l-7*m+114)/31);
+  const easterDay=((h+l-7*m+114)%31)+1;
+  const easter=new Date(year,easterMonth-1,easterDay);
+  const fmt=dt=>`${year}-${String(dt.getMonth()+1).padStart(2,"0")}-${String(dt.getDate()).padStart(2,"0")}`;
+  const sextaSanta=new Date(easter); sextaSanta.setDate(easter.getDate()-2);
+  const carnavalTer=new Date(easter); carnavalTer.setDate(easter.getDate()-47);
+  const carnavalSeg=new Date(easter); carnavalSeg.setDate(easter.getDate()-48);
+  const corpus=new Date(easter); corpus.setDate(easter.getDate()+60);
+  const result={};
+  fixed.forEach(([mo,dy,name])=>{ result[`${year}-${String(mo).padStart(2,"0")}-${String(dy).padStart(2,"0")}`]=name; });
+  result[fmt(sextaSanta)]="Sexta-feira Santa";
+  result[fmt(carnavalSeg)]="Carnaval";
+  result[fmt(carnavalTer)]="Carnaval";
+  result[fmt(corpus)]="Corpus Christi";
+  return result;
+}
+function getHolidaysForRange(start, end) {
+  if (!start||!end) return {};
+  const sy=parseDate(start).getFullYear(), ey=parseDate(end).getFullYear();
+  let all={};
+  for(let y=sy;y<=ey;y++) Object.assign(all,getHolidaysForYear(y));
+  return all;
+}
+
+const INITIAL_STATE = {
+  members:[], cars:[], events:[],
+  config:{ semesterStart:"", semesterEnd:"", classDays:[1,3,5], taxaViagem:8, skipHolidays:true },
+  compensations:[], history:[],
+};
+
+function generateClassDates(start, end, classDays, holidays={}, skipHolidays=true) {
+  if (!start||!end||!Array.isArray(classDays)||classDays.length===0) return [];
+  const cur=parseDate(start), endDate=parseDate(end);
+  if(isNaN(cur)||isNaN(endDate)||cur>endDate) return [];
+  const dates=[];
+  while(cur<=endDate){
+    const ds=dateStr(cur);
+    if(classDays.includes(cur.getDay())&&!(skipHolidays&&holidays[ds])) dates.push(ds);
+    cur.setDate(cur.getDate()+1);
+  }
+  return dates;
+}
+
+function buildCarUsageMap(events, cars) {
+  const usage={};
+  cars.forEach(c=>{ usage[c.id]=0; });
+  events.forEach(e=>{ if(!e||!e.carroId||e.status==="falta"||e.status==="vazio") return; usage[e.carroId]=(usage[e.carroId]||0)+1; });
+  return usage;
+}
+
+function pickBalancedCarOwner({members,cars,carUsage,scores={},excludeMemberId=null}) {
+  return members.filter(m=>m.possuiCarro&&m.id!==excludeMemberId)
+    .map(owner=>{ const car=cars.find(c=>c.proprietarioId===owner.id); return car?{owner,car,usage:carUsage[car.id]||0,ownerScore:scores[owner.id]||0}:null; })
+    .filter(Boolean).sort((a,b)=>a.usage-b.usage||a.ownerScore-b.ownerScore)[0]||null;
+}
+
+function isMemberAvailable(member, date) {
+  if(!member) return false;
+  const dow=getDayOfWeek(date);
+  if(member.diasDisponiveis&&member.diasDisponiveis.length>0&&!member.diasDisponiveis.includes(dow)) return false;
+  if(member.datasIndisponiveis&&member.datasIndisponiveis.includes(date)) return false;
+  return true;
+}
+
+function generateSchedule(dates, members, cars, taxaViagem, existingEvents=[]) {
+  if(!Array.isArray(dates)||!Array.isArray(members)||!Array.isArray(cars)||!Array.isArray(existingEvents)) return {events:[],compensations:[]};
+  if(!dates.length||!members.length){ const today=dateStr(new Date()); return {events:existingEvents.filter(e=>e&&e.data&&e.data<today).sort((a,b)=>a.data.localeCompare(b.data)),compensations:[]}; }
+  const scores={};
+  members.forEach(m=>{ scores[m.id]=m.scoreDesgaste||0; });
+  const today=dateStr(new Date());
+  const pastEvents=existingEvents.filter(e=>e.data<today);
+  const carUsage=buildCarUsageMap(pastEvents,cars);
+  pastEvents.forEach(e=>{ if(e.pilotoId&&scores[e.pilotoId]!==undefined) scores[e.pilotoId]++; });
+  const newEvents=[],compensations=[];
+  for(const date of dates){
+    if(date<today){ const ex=existingEvents.find(e=>e.data===date); newEvents.push(ex||{id:uuid(),data:date,status:"normal",pilotoId:null,carroId:null,passageiros:[]}); continue; }
+    const available=members.slice().filter(m=>isMemberAvailable(m,date)).sort((a,b)=>(scores[a.id]||0)-(scores[b.id]||0));
+    const pilot=available[0];
+    if(!pilot){ newEvents.push({id:uuid(),data:date,status:"vazio",pilotoId:null,carroId:null,passageiros:[]}); continue; }
+    let carroId=null,comp=null;
+    if(pilot.possuiCarro){ const car=cars.find(c=>c.proprietarioId===pilot.id); carroId=car?car.id:null; }
+    else{ const sel=pickBalancedCarOwner({members,cars,carUsage,scores,excludeMemberId:pilot.id}); if(sel){ carroId=sel.car.id; comp={id:uuid(),data:date,pagadorId:pilot.id,receptorId:sel.owner.id,valor:taxaViagem,motivo:"sem-carro"}; } }
+    scores[pilot.id]=(scores[pilot.id]||0)+1;
+    if(carroId) carUsage[carroId]=(carUsage[carroId]||0)+1;
+    newEvents.push({id:uuid(),data:date,status:"normal",pilotoId:pilot.id,carroId,passageiros:members.filter(m=>m.id!==pilot.id).map(m=>m.id),compensacao:comp||null});
+    if(comp) compensations.push(comp);
+  }
+  return {events:[...pastEvents.filter(e=>!newEvents.find(ne=>ne.data===e.data)),...newEvents].sort((a,b)=>a.data.localeCompare(b.data)),compensations};
+}
+
+function recalcFromDate(fromDate, allEvents, members, cars, taxaViagem) {
+  const today=dateStr(new Date());
+  const pastEvents=allEvents.filter(e=>e.data<fromDate||e.data<today||(e.data>=fromDate&&e.status==="falta"));
+  const futureEvents=allEvents.filter(e=>e.data>=fromDate&&e.data>=today&&e.status!=="falta");
+  const carUsage=buildCarUsageMap(pastEvents,cars);
+  const scores={}; members.forEach(m=>{ scores[m.id]=m.scoreDesgaste||0; });
+  allEvents.filter(e=>e.data<fromDate).forEach(e=>{ if(e.pilotoId&&scores[e.pilotoId]!==undefined) scores[e.pilotoId]++; });
+  const newFuture=[],newComps=[];
+  for(const ev of futureEvents){
+    const available=members.slice().filter(m=>isMemberAvailable(m,ev.data)).sort((a,b)=>(scores[a.id]||0)-(scores[b.id]||0));
+    const pilot=available[0];
+    if(!pilot){ newFuture.push({...ev,status:"vazio",pilotoId:null,carroId:null}); continue; }
+    let carroId=null,comp=null;
+    if(pilot.possuiCarro){ const car=cars.find(c=>c.proprietarioId===pilot.id); carroId=car?car.id:null; }
+    else{ const sel=pickBalancedCarOwner({members,cars,carUsage,scores,excludeMemberId:pilot.id}); if(sel){ carroId=sel.car.id; comp={id:uuid(),data:ev.data,pagadorId:pilot.id,receptorId:sel.owner.id,valor:taxaViagem,motivo:"sem-carro"}; } }
+    scores[pilot.id]=(scores[pilot.id]||0)+1;
+    if(carroId) carUsage[carroId]=(carUsage[carroId]||0)+1;
+    newFuture.push({...ev,pilotoId:pilot.id,carroId,passageiros:members.filter(m=>m.id!==pilot.id).map(m=>m.id),compensacao:comp||null});
+    if(comp) newComps.push(comp);
+  }
+  return {events:[...pastEvents,...newFuture].sort((a,b)=>a.data.localeCompare(b.data)),compensations:newComps};
+}
+
+const STORAGE_KEY="carona-academica-v3";
+function normalizeState(raw) {
+  if(!raw||typeof raw!=="object") return {...INITIAL_STATE};
+  return {
+    members:Array.isArray(raw.members)?raw.members:[],
+    cars:Array.isArray(raw.cars)?raw.cars:[],
+    events:Array.isArray(raw.events)?raw.events:[],
+    config:{
+      semesterStart:raw.config?.semesterStart||"",
+      semesterEnd:raw.config?.semesterEnd||"",
+      classDays:Array.isArray(raw.config?.classDays)?raw.config.classDays:[1,3,5],
+      taxaViagem:typeof raw.config?.taxaViagem==="number"?raw.config.taxaViagem:8,
+      skipHolidays:raw.config?.skipHolidays!==false,
+    },
+    compensations:Array.isArray(raw.compensations)?raw.compensations:[],
+    history:Array.isArray(raw.history)?raw.history:[],
+  };
+}
+function loadState() {
+  try {
+    const raw=localStorage.getItem(STORAGE_KEY)||localStorage.getItem("carona-academica-v2");
+    if(raw) return normalizeState(JSON.parse(raw));
+  } catch {}
+  return normalizeState(null);
+}
+function saveState(s) { try { localStorage.setItem(STORAGE_KEY,JSON.stringify(s)); } catch {} }
+
+function exportCSV(events, members, cars) {
+  const gn=id=>members.find(m=>m.id===id)?.nome||"--";
+  const gc=id=>{ const c=cars.find(x=>x.id===id); if(!c) return "--"; const o=members.find(m=>m.id===c.proprietarioId); return c.modelo||`Carro de ${o?.nome||"--"}`; };
+  const rows=[["Data","Dia","Status","Piloto","Veiculo","Passageiros","Comp R$","Pagador","Receptor"]];
+  const dows=["Dom","Seg","Ter","Qua","Qui","Sex","Sab"];
+  events.forEach(e=>{
+    const st=e.status==="normal"?"Normal":e.status==="falta"?"Falta":e.status==="quebrado"?"Carro Quebrado":"Sem Aula";
+    rows.push([formatDate(e.data),dows[getDayOfWeek(e.data)],st,gn(e.pilotoId),gc(e.carroId),(e.passageiros||[]).map(p=>gn(p)).join("; "),e.compensacao?e.compensacao.valor:"",e.compensacao?gn(e.compensacao.pagadorId):"",e.compensacao?gn(e.compensacao.receptorId):""]);
+  });
+  const csv=rows.map(r=>r.map(v=>`"${String(v).replace(/"/g,'""')}"`).join(",")).join("\n");
+  const blob=new Blob(["\uFEFF"+csv],{type:"text/csv;charset=utf-8;"});
+  const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download="escala_caronas.csv"; a.click(); URL.revokeObjectURL(url);
+}
+function exportJSON(state) {
+  const blob=new Blob([JSON.stringify(state,null,2)],{type:"application/json"});
+  const url=URL.createObjectURL(blob); const a=document.createElement("a"); a.href=url; a.download="backup_caronas.json"; a.click(); URL.revokeObjectURL(url);
+}
+
+// --- ICONS ---
+const IconCar=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 17H3a2 2 0 0 1-2-2V9a2 2 0 0 1 2-2h2"/><path d="M19 17h2a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-2"/><rect x="5" y="7" width="14" height="12" rx="1"/><circle cx="8.5" cy="17" r="1.5"/><circle cx="15.5" cy="17" r="1.5"/><path d="M5 9h14"/></svg>);
+const IconUser=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>);
+const IconCalendar=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>);
+const IconDollar=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>);
+const IconSettings=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>);
+const IconX=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>);
+const IconPlus=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>);
+const IconTrash=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="3 6 5 6 21 6"/><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2"/></svg>);
+const IconEdit=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>);
+const IconDownload=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>);
+const IconUpload=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>);
+const IconAlert=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M10.29 3.86L1.82 18a2 2 0 0 0 1.71 3h16.94a2 2 0 0 0 1.71-3L13.71 3.86a2 2 0 0 0-3.42 0z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>);
+const IconHistory=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>);
+const IconPrinter=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>);
+const IconCheck=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>);
+
+const STATUS_CONFIG={
+  normal:{label:"Normal",bg:"bg-emerald-100",text:"text-emerald-800",dot:"bg-emerald-500"},
+  falta:{label:"Falta",bg:"bg-red-100",text:"text-red-800",dot:"bg-red-500"},
+  quebrado:{label:"Carro Quebrado",bg:"bg-amber-100",text:"text-amber-800",dot:"bg-amber-500"},
+  vazio:{label:"Sem Aula",bg:"bg-slate-100",text:"text-slate-500",dot:"bg-slate-400"},
+};
+const DAY_NAMES=["Dom","Seg","Ter","Qua","Qui","Sex","Sab"];
+const DAY_NAMES_FULL=["Domingo","Segunda","Terca","Quarta","Quinta","Sexta","Sabado"];
+const MONTH_NAMES=["Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
+const MEMBER_COLORS=["bg-violet-500","bg-blue-500","bg-emerald-500","bg-pink-500","bg-amber-500","bg-cyan-500","bg-rose-500","bg-indigo-500"];
+function getMemberColor(i) { return MEMBER_COLORS[i%MEMBER_COLORS.length]; }
+
+function Modal({title,onClose,children,wide=false}) {
+  return (
+    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
+      <div className={`bg-white rounded-2xl shadow-2xl w-full ${wide?"max-w-2xl":"max-w-md"} max-h-[90vh] overflow-y-auto`}>
+        <div className="flex items-center justify-between p-5 border-b border-slate-100">
+          <h2 className="text-lg font-semibold text-slate-800">{title}</h2>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 transition-colors"><IconX/></button>
+        </div>
+        <div className="p-5">{children}</div>
+      </div>
+    </div>
+  );
+}
+
+function AlertasBanner({events,members}) {
+  const today=dateStr(new Date());
+  const alertas=useMemo(()=>{
+    const list=[];
+    const future=events.filter(e=>e.data>=today&&e.status!=="falta");
+    const vazio=future.filter(e=>e.status==="vazio");
+    if(vazio.length>0) list.push(`${vazio.length} dia(s) sem piloto disponivel na escala futura`);
+    const semCarro=future.filter(e=>e.status==="normal"&&!e.carroId);
+    if(semCarro.length>0) list.push(`${semCarro.length} dia(s) com piloto mas sem veiculo designado`);
+    if(members.length>0&&!members.some(m=>m.possuiCarro)) list.push("Nenhum membro com carro cadastrado");
+    return list;
+  },[events,members,today]);
+  if(!alertas.length) return null;
+  return (
+    <div className="flex flex-col gap-1.5 p-3 bg-amber-50 border border-amber-200 rounded-2xl">
+      {alertas.map((a,i)=>(<div key={i} className="flex items-center gap-2 text-sm text-amber-700"><IconAlert/>{a}</div>))}
+    </div>
+  );
+}
+
+function CalendarTab({events,members,cars,config,holidays,onMarkFalta,onCancelFalta,onCarQuebrou}) {
+  const today=dateStr(new Date());
+  const [viewMode,setViewMode]=useState("month");
+  const [viewDate,setViewDate]=useState(()=>{ const d=new Date(); return {year:d.getFullYear(),month:d.getMonth()}; });
+  const [selectedEvent,setSelectedEvent]=useState(null);
+  const eventMap=useMemo(()=>{ const m={}; events.forEach(e=>{ m[e.data]=e; }); return m; },[events]);
+  const gn=id=>members.find(x=>x.id===id)?.nome||"--";
+  const gc=id=>{ const c=cars.find(x=>x.id===id); if(!c) return "--"; const o=members.find(m=>m.id===c.proprietarioId); return c.modelo?`${c.modelo} (${o?.nome||""})`:`Carro de ${o?.nome||"--"}`; };
+  const gi=id=>members.findIndex(m=>m.id===id);
+  const days=[];
+  const firstDay=new Date(viewDate.year,viewDate.month,1);
+  const lastDay=new Date(viewDate.year,viewDate.month+1,0);
+  for(let i=0;i<firstDay.getDay();i++) days.push(null);
+  for(let d=1;d<=lastDay.getDate();d++) days.push(dateStr(new Date(viewDate.year,viewDate.month,d)));
+  const prevMonth=()=>setViewDate(v=>v.month===0?{year:v.year-1,month:11}:{...v,month:v.month-1});
+  const nextMonth=()=>setViewDate(v=>v.month===11?{year:v.year+1,month:0}:{...v,month:v.month+1});
+  const prevYear=()=>setViewDate(v=>({...v,year:v.year-1}));
+  const nextYear=()=>setViewDate(v=>({...v,year:v.year+1}));
+  const inSem=date=>config.semesterStart&&config.semesterEnd&&date>=config.semesterStart&&date<=config.semesterEnd;
+
+  function renderMiniMonth(mi) {
+    const first=new Date(viewDate.year,mi,1),last=new Date(viewDate.year,mi+1,0);
+    const md=[]; for(let i=0;i<first.getDay();i++) md.push(null); for(let d=1;d<=last.getDate();d++) md.push(d);
+    return (
+      <div key={`mini-${mi}`} className="bg-white rounded-xl border border-slate-100 p-2.5">
+        <h3 className="text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">{MONTH_NAMES[mi]}</h3>
+        <div className="grid grid-cols-7 mb-1">{DAY_NAMES.map(n=>(<div key={`${mi}-${n}`} className="text-[9px] text-center text-slate-400">{n[0]}</div>))}</div>
+        <div className="grid grid-cols-7 gap-px">
+          {md.map((d,idx)=>{
+            if(!d) return <div key={`e-${mi}-${idx}`} className="h-5"/>;
+            const full=dateStr(new Date(viewDate.year,mi,d));
+            const ev=eventMap[full]; const cfg=ev?STATUS_CONFIG[ev.status]:null;
+            const isHol=holidays[full]; const isBound=full===config.semesterStart||full===config.semesterEnd;
+            const classDay=config.classDays&&config.classDays.includes(getDayOfWeek(full));
+            let cls="text-slate-400";
+            if(isHol) cls="bg-rose-100 text-rose-700";
+            else if(cfg) cls=`${cfg.bg} ${cfg.text}`;
+            else if(isBound) cls="bg-amber-100 text-amber-800";
+            else if(classDay&&inSem(full)) cls="bg-emerald-50 text-emerald-700";
+            return <button key={full} onClick={()=>ev&&setSelectedEvent(ev)} className={`h-5 text-[10px] rounded ${ev?"cursor-pointer hover:opacity-70":""} ${cls}`} title={isHol?holidays[full]:formatDate(full)}>{d}</button>;
+          })}
+        </div>
+      </div>
+    );
+  }
+
+  const ev=selectedEvent; const isFuture=ev&&ev.data>=today;
+  return (
+    <div className="space-y-4">
+      <AlertasBanner events={events} members={members}/>
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="inline-flex rounded-xl bg-slate-100 p-1">
+          <button onClick={()=>setViewMode("month")} className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${viewMode==="month"?"bg-white text-slate-700 shadow-sm":"text-slate-500"}`}>Mensal</button>
+          <button onClick={()=>setViewMode("year")} className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${viewMode==="year"?"bg-white text-slate-700 shadow-sm":"text-slate-500"}`}>Anual</button>
+        </div>
+        <div className="flex flex-wrap gap-2 text-xs">
+          {Object.entries(STATUS_CONFIG).map(([k,v])=>(<div key={k} className="flex items-center gap-1"><span className={`w-2 h-2 rounded-full ${v.dot}`}/><span className="text-slate-600">{v.label}</span></div>))}
+          <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-rose-400"/><span className="text-slate-600">Feriado</span></div>
+        </div>
+      </div>
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
+          <button onClick={viewMode==="month"?prevMonth:prevYear} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <h2 className="font-semibold text-slate-800">{viewMode==="month"?`${MONTH_NAMES[viewDate.month]} ${viewDate.year}`:viewDate.year}</h2>
+          <button onClick={viewMode==="month"?nextMonth:nextYear} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+        </div>
+        {viewMode==="month"?(
+          <>
+            <div className="grid grid-cols-7 border-b border-slate-100">{DAY_NAMES.map(d=>(<div key={d} className="text-center py-2 text-xs font-medium text-slate-500">{d}</div>))}</div>
+            <div className="grid grid-cols-7">
+              {days.map((date,i)=>{
+                if(!date) return <div key={`pad-${i}`} className="h-16 border-b border-r border-slate-50"/>;
+                const evD=eventMap[date]; const isToday=date===today; const cfg=evD?STATUS_CONFIG[evD.status]:null;
+                const isHol=holidays[date]; const pilotIdx=evD?.pilotoId?gi(evD.pilotoId):-1;
+                return (
+                  <div key={date} onClick={()=>evD&&setSelectedEvent(evD)}
+                    className={`h-16 border-b border-r border-slate-50 p-1 ${evD?"cursor-pointer hover:opacity-80 transition-opacity":""} ${isToday?"ring-2 ring-inset ring-blue-400":""} ${isHol?"bg-rose-50":cfg?cfg.bg:""}`}>
+                    <div className={`text-xs font-medium mb-0.5 ${isToday?"text-blue-600":isHol?"text-rose-600":cfg?cfg.text:"text-slate-400"}`}>{parseDate(date).getDate()}</div>
+                    {isHol&&<div className="text-[8px] text-rose-500 leading-tight truncate">{holidays[date]}</div>}
+                    {evD&&evD.status!=="vazio"&&!isHol&&(
+                      <div className="space-y-0.5">
+                        {evD.pilotoId&&<div className={`text-[9px] font-semibold truncate px-1 rounded ${pilotIdx>=0?getMemberColor(pilotIdx):"bg-slate-400"} text-white`}>{gn(evD.pilotoId).split(" ")[0]}</div>}
+                        {evD.compensacao&&<div className="text-[9px] text-amber-700 font-medium">R${evD.compensacao.valor}</div>}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </>
+        ):(
+          <div className="p-4 grid grid-cols-2 lg:grid-cols-3 gap-3 bg-slate-50">{MONTH_NAMES.map((_,mi)=>renderMiniMonth(mi))}</div>
+        )}
+      </div>
+      {ev&&!ev._holiday&&(
+        <Modal title={`${formatDate(ev.data)} - ${DAY_NAMES_FULL[getDayOfWeek(ev.data)]}`} onClose={()=>setSelectedEvent(null)}>
+          <div className="space-y-4">
+            <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium ${STATUS_CONFIG[ev.status]?.bg} ${STATUS_CONFIG[ev.status]?.text}`}>
+              <span className={`w-2 h-2 rounded-full ${STATUS_CONFIG[ev.status]?.dot}`}/>{STATUS_CONFIG[ev.status]?.label}
+            </div>
+            {ev.status!=="vazio"&&(
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+                  <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold ${getMemberColor(gi(ev.pilotoId))}`}>{gn(ev.pilotoId)[0]}</div>
+                  <div><div className="text-xs text-slate-500">Piloto</div><div className="font-semibold text-slate-800">{gn(ev.pilotoId)}</div></div>
+                </div>
+                {ev.carroId&&(<div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl"><div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-200 text-slate-600"><IconCar/></div><div><div className="text-xs text-slate-500">Veiculo</div><div className="font-semibold text-slate-800">{gc(ev.carroId)}</div></div></div>)}
+                {ev.passageiros?.length>0&&(<div className="p-3 bg-slate-50 rounded-xl"><div className="text-xs text-slate-500 mb-2">Passageiros</div><div className="flex flex-wrap gap-1.5">{ev.passageiros.map(pid=>(<span key={pid} className="text-xs bg-white border border-slate-200 rounded-full px-2 py-0.5 text-slate-700">{gn(pid)}</span>))}</div></div>)}
+                {ev.compensacao&&(<div className="p-3 bg-amber-50 border border-amber-200 rounded-xl"><div className="text-xs text-amber-700 font-medium mb-1">{ev.compensacao.motivo==="sem-carro"?"Taxa de uso de veiculo":"Compensacao carro reserva"}</div><div className="text-sm text-amber-800"><strong>{gn(ev.compensacao.pagadorId)}</strong> deve pagar <strong>R${ev.compensacao.valor}</strong> para <strong>{gn(ev.compensacao.receptorId)}</strong></div></div>)}
+              </div>
+            )}
+            {isFuture&&ev.status==="falta"&&(
+              <div className="pt-2 border-t border-slate-100 space-y-2">
+                <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Acoes Rapidas</p>
+                <button onClick={()=>{onCancelFalta(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-sm font-medium transition-colors"><IconCheck/>Cancelar falta e recalcular</button>
+              </div>
+            )}
+            {isFuture&&ev.status!=="falta"&&(
+              <div className="pt-2 border-t border-slate-100 space-y-2">
+                <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Acoes Rapidas</p>
+                <button onClick={()=>{onMarkFalta(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl text-sm font-medium transition-colors">
+                  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
+                  Nao vou hoje (recalcular escala)
+                </button>
+                {ev.pilotoId&&members.find(m=>m.id===ev.pilotoId)?.possuiCarro&&(
+                  <button onClick={()=>{onCarQuebrou(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-xl text-sm font-medium transition-colors">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3-3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-3 3z"/><path d="M8.3 14.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l1.4-1.4"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
+                    Meu carro quebrou (trocar veiculo)
+                  </button>
+                )}
+              </div>
+            )}
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+function MembersTab({members,cars,onAddMember,onEditMember,onRemoveMember}) {
+  const [showForm,setShowForm]=useState(false);
+  const [editId,setEditId]=useState(null);
+  const [form,setForm]=useState({nome:"",possuiCarro:false,modelo:"",diasDisponiveis:[0,1,2,3,4,5,6],datasIndisponiveis:[]});
+  const [newDateIndisp,setNewDateIndisp]=useState("");
+  function openAdd() { setForm({nome:"",possuiCarro:false,modelo:"",diasDisponiveis:[0,1,2,3,4,5,6],datasIndisponiveis:[]}); setEditId(null); setShowForm(true); }
+  function openEdit(m) {
+    const car=cars.find(c=>c.proprietarioId===m.id);
+    setForm({nome:m.nome,possuiCarro:m.possuiCarro,modelo:car?.modelo||"",diasDisponiveis:m.diasDisponiveis||[0,1,2,3,4,5,6],datasIndisponiveis:m.datasIndisponiveis||[]});
+    setEditId(m.id); setShowForm(true);
+  }
+  function toggleDow(d) { setForm(f=>({...f,diasDisponiveis:f.diasDisponiveis.includes(d)?f.diasDisponiveis.filter(x=>x!==d):[...f.diasDisponiveis,d].sort()})); }
+  function addDateIndisp() { if(!newDateIndisp||form.datasIndisponiveis.includes(newDateIndisp)) return; setForm(f=>({...f,datasIndisponiveis:[...f.datasIndisponiveis,newDateIndisp].sort()})); setNewDateIndisp(""); }
+  function removeDateIndisp(dt) { setForm(f=>({...f,datasIndisponiveis:f.datasIndisponiveis.filter(x=>x!==dt)})); }
+  function handleSubmit() { if(!form.nome.trim()) return; editId?onEditMember(editId,form):onAddMember(form); setShowForm(false); }
+  return (
+    <div className="space-y-4">
+      <div className="flex items-center justify-between">
+        <h2 className="font-semibold text-slate-700">Membros do Grupo</h2>
+        <button onClick={openAdd} className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors"><IconPlus/>Adicionar</button>
+      </div>
+      {members.length===0?(<div className="text-center py-12 text-slate-400"><div className="text-4xl mb-3">👥</div><p>Nenhum membro cadastrado.</p></div>):(
+        <div className="space-y-2">
+          {members.map((m,i)=>{
+            const car=cars.find(c=>c.proprietarioId===m.id);
+            const dowCount=m.diasDisponiveis?.length||7;
+            return (
+              <div key={m.id} className="flex items-center gap-3 p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+                <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${getMemberColor(i)}`}>{m.nome[0]?.toUpperCase()}</div>
+                <div className="flex-1 min-w-0">
+                  <div className="font-semibold text-slate-800 truncate">{m.nome}</div>
+                  <div className="flex flex-wrap items-center gap-2 mt-0.5">
+                    <span className={`text-xs px-2 py-0.5 rounded-full ${m.possuiCarro?"bg-emerald-100 text-emerald-700":"bg-slate-100 text-slate-500"}`}>{m.possuiCarro?`Carro: ${car?.modelo||"sim"}`:"Sem carro"}</span>
+                    <span className="text-xs text-slate-500">Score: {m.scoreDesgaste}</span>
+                    {dowCount<7&&<span className="text-xs text-violet-600 bg-violet-50 px-2 py-0.5 rounded-full">{dowCount} dias/sem.</span>}
+                    {(m.datasIndisponiveis?.length||0)>0&&<span className="text-xs text-red-500 bg-red-50 px-2 py-0.5 rounded-full">{m.datasIndisponiveis.length} data(s) bloq.</span>}
+                  </div>
+                </div>
+                <div className="flex gap-1">
+                  <button onClick={()=>openEdit(m)} className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 transition-colors"><IconEdit/></button>
+                  <button onClick={()=>onRemoveMember(m.id)} className="p-2 rounded-lg hover:bg-red-50 text-red-400 hover:text-red-600 transition-colors"><IconTrash/></button>
+                </div>
+              </div>
+            );
+          })}
+        </div>
+      )}
+      {showForm&&(
+        <Modal title={editId?"Editar Membro":"Novo Membro"} onClose={()=>setShowForm(false)} wide>
+          <div className="space-y-4">
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-1">Nome *</label>
+              <input value={form.nome} onChange={e=>setForm(f=>({...f,nome:e.target.value}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Nome completo"/>
+            </div>
+            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+              <input type="checkbox" id="possuiCarro" checked={form.possuiCarro} onChange={e=>setForm(f=>({...f,possuiCarro:e.target.checked}))} className="w-4 h-4 rounded accent-blue-600"/>
+              <label htmlFor="possuiCarro" className="text-sm font-medium text-slate-700">Possui carro proprio</label>
+            </div>
+            {form.possuiCarro&&(<div><label className="block text-sm font-medium text-slate-700 mb-1">Modelo do carro</label><input value={form.modelo} onChange={e=>setForm(f=>({...f,modelo:e.target.value}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Ex: Honda Civic"/></div>)}
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Dias disponiveis para dirigir</label>
+              <div className="flex gap-1.5">{DAY_NAMES.map((n,d)=>(<button key={d} type="button" onClick={()=>toggleDow(d)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-colors ${form.diasDisponiveis.includes(d)?"bg-blue-600 text-white":"bg-slate-100 text-slate-400"}`}>{n}</button>))}</div>
+              {form.diasDisponiveis.length===0&&<p className="text-xs text-red-500 mt-1">Atencao: membro sem nenhum dia disponivel.</p>}
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-slate-700 mb-2">Datas indisponiveis (especificas)</label>
+              <div className="flex gap-2">
+                <input type="date" value={newDateIndisp} onChange={e=>setNewDateIndisp(e.target.value)} className="flex-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+                <button type="button" onClick={addDateIndisp} className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-sm font-medium transition-colors"><IconPlus/></button>
+              </div>
+              {form.datasIndisponiveis.length>0&&(
+                <div className="flex flex-wrap gap-1.5 mt-2">
+                  {form.datasIndisponiveis.map(dt=>(<span key={dt} className="inline-flex items-center gap-1 text-xs bg-red-50 text-red-600 border border-red-200 rounded-full px-2 py-0.5">{formatDateShort(dt)}<button type="button" onClick={()=>removeDateIndisp(dt)} className="hover:text-red-800"><IconX/></button></span>))}
+                </div>
+              )}
+            </div>
+            <div className="flex gap-2 pt-2">
+              <button onClick={()=>setShowForm(false)} className="flex-1 px-4 py-2 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">Cancelar</button>
+              <button onClick={handleSubmit} className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Salvar</button>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </div>
+  );
+}
+
+function FinancialTab({members,events,compensations,cars,config,onExportImage}) {
+  const today=dateStr(new Date());
+  const stats=useMemo(()=>{
+    const driveCounts={}, carCounts={};
+    members.forEach(m=>{ driveCounts[m.id]=0; });
+    cars.forEach(c=>{ carCounts[c.id]=0; });
+    events.forEach(e=>{
+      if(e.pilotoId&&e.status==="normal") driveCounts[e.pilotoId]=(driveCounts[e.pilotoId]||0)+1;
+      if(e.carroId&&e.status==="normal") carCounts[e.carroId]=(carCounts[e.carroId]||0)+1;
+    });
+    const balances={};
+    members.forEach(m=>{ balances[m.id]=0; });
+    compensations.forEach(c=>{ balances[c.pagadorId]=(balances[c.pagadorId]||0)-c.valor; balances[c.receptorId]=(balances[c.receptorId]||0)+c.valor; });
+    const driveArr=Object.values(driveCounts);
+    const fairness=driveArr.length>1?stddev(driveArr):0;
+    const totalFuture=events.filter(e=>e.data>=today&&e.status==="normal").length;
+    return {driveCounts,carCounts,balances,fairness,totalFuture};
+  },[members,events,compensations,cars,today]);
+  const maxDrives=Math.max(...Object.values(stats.driveCounts),1);
+  const gn=id=>members.find(m=>m.id===id)?.nome||"--";
+  const gi=id=>members.findIndex(m=>m.id===id);
+  return (
+    <div className="space-y-5">
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
+        <h3 className="font-semibold text-slate-800 mb-3">Simulador de Justica</h3>
+        {members.length<2?(<p className="text-slate-400 text-sm">Adicione pelo menos 2 membros.</p>):(
+          <div className="space-y-3">
+            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${stats.fairness<1?"bg-emerald-500":stats.fairness<3?"bg-amber-500":"bg-red-500"}`}>{stats.fairness<1?"OK":stats.fairness<3?"~":"!"}</div>
+              <div>
+                <div className="font-semibold text-slate-800">Desvio padrao: {stats.fairness.toFixed(2)} viagens</div>
+                <div className="text-xs text-slate-500">{stats.fairness<1?"Escala muito equilibrada":stats.fairness<3?"Leve desequilibrio - aceitavel":"Desequilibrio significativo - considere regenerar"}</div>
+              </div>
+            </div>
+            <div className="grid grid-cols-2 gap-2">
+              <div className="p-3 bg-blue-50 rounded-xl text-center"><div className="font-bold text-blue-700 text-lg">{stats.totalFuture}</div><div className="text-blue-600 text-xs">aulas futuras</div></div>
+              <div className="p-3 bg-violet-50 rounded-xl text-center"><div className="font-bold text-violet-700 text-lg">{members.length>0?(stats.totalFuture/members.length).toFixed(1):0}</div><div className="text-violet-600 text-xs">aulas/pessoa</div></div>
+            </div>
+            {cars.length>1&&(<div>{cars.map(c=>{ const o=members.find(m=>m.id===c.proprietarioId); const cnt=stats.carCounts[c.id]||0; const maxC=Math.max(...Object.values(stats.carCounts),1); return (<div key={c.id} className="mb-2"><div className="flex justify-between text-xs mb-0.5"><span className="text-slate-600">{c.modelo||`Carro de ${o?.nome||"?"}`}</span><span className="text-slate-500">{cnt}x</span></div><div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden"><div className="h-full rounded-full bg-blue-400" style={{width:`${(cnt/maxC)*100}%`}}/></div></div>); })}</div>)}
+          </div>
+        )}
+      </div>
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
+        <h3 className="font-semibold text-slate-800 mb-4">Distribuicao de Viagens</h3>
+        {members.length===0?(<p className="text-slate-400 text-sm text-center py-4">Nenhum membro.</p>):(
+          <div className="space-y-3">
+            {members.map((m,i)=>{ const count=stats.driveCounts[m.id]||0; const pct=maxDrives>0?(count/maxDrives)*100:0; return (<div key={m.id}><div className="flex items-center justify-between mb-1"><span className="text-sm text-slate-700 font-medium">{m.nome}</span><span className="text-sm text-slate-500">{count} viagem{count!==1?"s":""}</span></div><div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden"><div className={`h-full rounded-full transition-all ${getMemberColor(i)}`} style={{width:`${pct}%`}}/></div></div>); })}
+          </div>
+        )}
+      </div>
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
+        <h3 className="font-semibold text-slate-800 mb-4">Saldo Financeiro</h3>
+        {members.length===0?(<p className="text-slate-400 text-sm text-center py-4">Nenhum membro.</p>):(
+          <div className="space-y-2">
+            {members.map((m,i)=>{ const bal=stats.balances[m.id]||0; return (<div key={m.id} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl"><div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold ${getMemberColor(i)}`}>{m.nome[0]}</div><span className="flex-1 text-sm font-medium text-slate-700">{m.nome}</span><span className={`text-sm font-bold ${bal>0?"text-emerald-600":bal<0?"text-red-600":"text-slate-400"}`}>{bal!==0?`R$${Math.abs(bal).toFixed(2)}`:"Zerado"}</span>{bal>0&&<span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">a receber</span>}{bal<0&&<span className="text-xs text-red-600 bg-red-50 px-2 py-0.5 rounded-full">a pagar</span>}</div>); })}
+          </div>
+        )}
+      </div>
+      {compensations.length>0&&(
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
+          <h3 className="font-semibold text-slate-800 mb-4">Quem Deve Para Quem</h3>
+          {(()=>{ const owes={}; compensations.forEach(c=>{ const k=`${c.pagadorId}>${c.receptorId}`; owes[k]=(owes[k]||0)+c.valor; }); return Object.entries(owes).map(([key,val])=>{ const [fromId,toId]=key.split(">"); return (<div key={key} className="flex items-center gap-2 p-3 bg-slate-50 rounded-xl mb-2 text-sm"><span className="font-medium text-red-600">{gn(fromId)}</span><span className="text-slate-400">deve</span><span className="font-bold text-slate-800">R${val.toFixed(2)}</span><span className="text-slate-400">para</span><span className="font-medium text-emerald-600">{gn(toId)}</span></div>); }); })()}
+        </div>
+      )}
+      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
+        <h3 className="font-semibold text-slate-800 mb-4">Log de Compensacoes</h3>
+        {compensations.length===0?(<p className="text-slate-400 text-sm text-center py-4">Nenhuma compensacao.</p>):(
+          <div className="space-y-2 max-h-64 overflow-y-auto scrollbar-thin">
+            {[...compensations].sort((a,b)=>a.data.localeCompare(b.data)).map(c=>(<div key={c.id} className={`p-3 rounded-xl border text-sm ${c.motivo==="quebrado"?"bg-amber-50 border-amber-200":"bg-blue-50 border-blue-200"}`}><div className="flex items-center justify-between"><span className="font-medium text-slate-700">{formatDateShort(c.data)}</span><span className={`font-bold ${c.motivo==="quebrado"?"text-amber-700":"text-blue-700"}`}>R${c.valor}</span></div><div className="text-slate-600 mt-0.5"><strong>{gn(c.pagadorId)}</strong> > <strong>{gn(c.receptorId)}</strong></div><div className="text-xs text-slate-400 mt-0.5">{c.motivo==="quebrado"?"Carro reserva (quebrado)":"Uso de veiculo (sem carro)"}</div></div>))}
+          </div>
+        )}
+      </div>
+      <div className="flex gap-2">
+        <button onClick={()=>exportCSV(events,members,cars)} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-sm font-medium transition-colors"><IconDownload/>Exportar CSV</button>
+        <button onClick={onExportImage} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-sm font-medium transition-colors"><IconDownload/>Exportar PNG</button>
+      </div>
+    </div>
+  );
+}
+
+function SettingsTab({config,history,state,onSave,onClear,onImport}) {
+  const [form,setForm]=useState({...config});
+  const [activeSection,setActiveSection]=useState("semester");
+  const fileRef=useRef(null);
+  function toggleDay(d) { setForm(f=>({...f,classDays:f.classDays.includes(d)?f.classDays.filter(x=>x!==d):[...f.classDays,d].sort()})); }
+  function handleImportFile(e) { const file=e.target.files[0]; if(!file) return; const r=new FileReader(); r.onload=ev=>{ try { const data=JSON.parse(ev.target.result); onImport(data); } catch { alert("Arquivo invalido."); } }; r.readAsText(file); e.target.value=""; }
+  const holidays=useMemo(()=>getHolidaysForRange(form.semesterStart,form.semesterEnd),[form.semesterStart,form.semesterEnd]);
+  const holsInSem=useMemo(()=>Object.entries(holidays).filter(([d])=>d>=form.semesterStart&&d<=form.semesterEnd).sort(),[holidays,form.semesterStart,form.semesterEnd]);
+  const historyTypes={config:{label:"Configuracao",color:"text-blue-600",bg:"bg-blue-50"},falta:{label:"Falta",color:"text-red-600",bg:"bg-red-50"},cancelar_falta:{label:"Falta cancelada",color:"text-emerald-600",bg:"bg-emerald-50"},car_quebrou:{label:"Carro quebrou",color:"text-amber-600",bg:"bg-amber-50"},add_member:{label:"Membro adicionado",color:"text-violet-600",bg:"bg-violet-50"},remove_member:{label:"Membro removido",color:"text-rose-600",bg:"bg-rose-50"},edit_member:{label:"Membro editado",color:"text-slate-600",bg:"bg-slate-50"}};
+  const sections=[{id:"semester",label:"Semestre"},{id:"backup",label:"Backup"},{id:"history",label:"Historico"},{id:"danger",label:"Perigo"}];
+  return (
+    <div className="space-y-4">
+      <div className="flex gap-1 bg-slate-100 p-1 rounded-xl">
+        {sections.map(s=>(<button key={s.id} onClick={()=>setActiveSection(s.id)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeSection===s.id?"bg-white text-slate-700 shadow-sm":"text-slate-500"}`}>{s.label}</button>))}
+      </div>
+      {activeSection==="semester"&&(
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 space-y-5">
+          <h3 className="font-semibold text-slate-800">Configuracoes do Semestre</h3>
+          <div className="grid grid-cols-2 gap-4">
+            <div><label className="block text-sm font-medium text-slate-700 mb-1">Data de Inicio</label><input type="date" value={form.semesterStart} onChange={e=>setForm(f=>({...f,semesterStart:e.target.value}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/></div>
+            <div><label className="block text-sm font-medium text-slate-700 mb-1">Data de Fim</label><input type="date" value={form.semesterEnd} onChange={e=>setForm(f=>({...f,semesterEnd:e.target.value}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/></div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-2">Dias de Aula</label>
+            <div className="flex gap-1.5">{DAY_NAMES.map((name,d)=>(<button key={d} onClick={()=>toggleDay(d)} className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-colors ${form.classDays.includes(d)?"bg-blue-600 text-white":"bg-slate-100 text-slate-500 hover:bg-slate-200"}`}>{name}</button>))}</div>
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-slate-700 mb-1">Taxa por Viagem (R$)</label>
+            <input type="number" min="0" step="0.5" value={form.taxaViagem} onChange={e=>setForm(f=>({...f,taxaViagem:parseFloat(e.target.value)||0}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
+            <p className="text-xs text-slate-400 mt-1">Valor cobrado quando alguem usa veiculo de outro membro.</p>
+          </div>
+          <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+            <input type="checkbox" id="skipHol" checked={form.skipHolidays!==false} onChange={e=>setForm(f=>({...f,skipHolidays:e.target.checked}))} className="w-4 h-4 rounded accent-blue-600"/>
+            <div>
+              <label htmlFor="skipHol" className="text-sm font-medium text-slate-700">Pular feriados nacionais automaticamente</label>
+              {form.semesterStart&&form.semesterEnd&&(<p className="text-xs text-slate-400">{holsInSem.length} feriado(s) no periodo</p>)}
+            </div>
+          </div>
+          {form.skipHolidays!==false&&holsInSem.length>0&&(
+            <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl">
+              <p className="text-xs font-medium text-rose-700 mb-2">Feriados no semestre:</p>
+              <div className="flex flex-wrap gap-1.5">{holsInSem.map(([d,name])=>(<span key={d} className="text-xs bg-white border border-rose-200 text-rose-700 rounded-full px-2 py-0.5">{formatDateShort(d)} {name}</span>))}</div>
+            </div>
+          )}
+          <button onClick={()=>onSave(form)} className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors">Salvar e Regenerar Escala</button>
+        </div>
+      )}
+      {activeSection==="backup"&&(
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 space-y-4">
+          <h3 className="font-semibold text-slate-800">Backup e Restauracao</h3>
+          <p className="text-sm text-slate-500">Exporte todos os dados para JSON e restaure quando precisar.</p>
+          <button onClick={()=>exportJSON(state)} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl font-medium transition-colors"><IconDownload/>Exportar Backup (JSON)</button>
+          <div>
+            <button onClick={()=>fileRef.current?.click()} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl font-medium transition-colors"><IconUpload/>Importar Backup (JSON)</button>
+            <input ref={fileRef} type="file" accept=".json" onChange={handleImportFile} className="hidden"/>
+            <p className="text-xs text-slate-400 mt-1 text-center">Atencao: importacao substitui todos os dados atuais.</p>
+          </div>
+        </div>
+      )}
+      {activeSection==="history"&&(
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
+          <div className="flex items-center gap-2 mb-4"><IconHistory/><h3 className="font-semibold text-slate-800">Historico de Alteracoes</h3></div>
+          {(!history||history.length===0)?(<p className="text-slate-400 text-sm text-center py-4">Nenhuma alteracao registrada.</p>):(
+            <div className="space-y-2 max-h-96 overflow-y-auto scrollbar-thin">
+              {[...history].reverse().map(h=>{ const ht=historyTypes[h.tipo]||{label:h.tipo,color:"text-slate-600",bg:"bg-slate-50"}; return (<div key={h.id} className={`p-3 rounded-xl ${ht.bg}`}><div className="flex items-center justify-between"><span className={`text-xs font-semibold ${ht.color}`}>{ht.label}</span><span className="text-xs text-slate-400">{new Date(h.timestamp).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</span></div><p className="text-sm text-slate-700 mt-0.5">{h.descricao}</p></div>); })}
+            </div>
+          )}
+        </div>
+      )}
+      {activeSection==="danger"&&(
+        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
+          <h3 className="font-semibold text-slate-800 mb-2">Zona de Perigo</h3>
+          <p className="text-sm text-slate-500 mb-4">Isso ira apagar todos os dados do app permanentemente.</p>
+          <button onClick={onClear} className="w-full px-4 py-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-medium transition-colors border border-red-200">Limpar Todos os Dados</button>
+        </div>
+      )}
+    </div>
+  );
+}
+
+function App() {
+  const [state,setState]=useState(()=>loadState());
+  const [tab,setTab]=useState("calendar");
+  const [toast,setToast]=useState(null);
+  const {members,cars,events,config,compensations,history}=state;
+  useEffect(()=>{ saveState(state); },[state]);
+  const holidays=useMemo(()=>getHolidaysForRange(config.semesterStart,config.semesterEnd),[config.semesterStart,config.semesterEnd]);
+  function showToast(msg,type="success") { setToast({msg,type}); setTimeout(()=>setToast(null),3000); }
+  function pushHistory(tipo,descricao) { return [{id:uuid(),tipo,descricao,timestamp:Date.now()}]; }
+
+  function handleSaveConfig(newConfig) {
+    setState(s=>{
+      const hols=getHolidaysForRange(newConfig.semesterStart,newConfig.semesterEnd);
+      const classDates=generateClassDates(newConfig.semesterStart,newConfig.semesterEnd,newConfig.classDays,hols,newConfig.skipHolidays!==false);
+      const result=generateSchedule(classDates,s.members,s.cars,newConfig.taxaViagem,s.events);
+      return {...s,config:newConfig,events:result.events,compensations:result.compensations,history:[...(s.history||[]),...pushHistory("config",`Semestre ${newConfig.semesterStart} a ${newConfig.semesterEnd}, taxa R$${newConfig.taxaViagem}`)]};
+    });
+    showToast("Configuracoes salvas e escala regenerada!");
+  }
+
+  function handleClear() {
+    if(!window.confirm("Tem certeza? Todos os dados serao apagados!")) return;
+    setState(INITIAL_STATE);
+    localStorage.removeItem(STORAGE_KEY);
+    localStorage.removeItem("carona-academica-v2");
+    showToast("Dados limpos.","info");
+  }
+
+  function handleImport(data) {
+    if(!window.confirm("Importar vai substituir todos os dados atuais. Confirmar?")) return;
+    setState(normalizeState(data));
+    showToast("Backup restaurado!");
+  }
+
+  function handleAddMember(form) {
+    const newMember={id:uuid(),nome:form.nome,possuiCarro:form.possuiCarro,scoreDesgaste:0,saldoFinanceiro:0,diasDisponiveis:form.diasDisponiveis||[0,1,2,3,4,5,6],datasIndisponiveis:form.datasIndisponiveis||[]};
+    const newCar=form.possuiCarro?{id:uuid(),proprietarioId:newMember.id,modelo:form.modelo}:null;
+    setState(s=>{
+      const nm=[...s.members,newMember]; const nc=newCar?[...s.cars,newCar]:s.cars;
+      const hols=getHolidaysForRange(s.config.semesterStart,s.config.semesterEnd);
+      const classDates=generateClassDates(s.config.semesterStart,s.config.semesterEnd,s.config.classDays,hols,s.config.skipHolidays!==false);
+      const result=generateSchedule(classDates,nm,nc,s.config.taxaViagem,s.events);
+      return {...s,members:nm,cars:nc,events:result.events,compensations:result.compensations,history:[...(s.history||[]),...pushHistory("add_member",`${form.nome} adicionado(a)`)]};
+    });
+    showToast(`${form.nome} adicionado(a)!`);
+  }
+
+  function handleEditMember(id,form) {
+    setState(s=>{
+      const nm=s.members.map(m=>m.id===id?{...m,nome:form.nome,possuiCarro:form.possuiCarro,diasDisponiveis:form.diasDisponiveis||[0,1,2,3,4,5,6],datasIndisponiveis:form.datasIndisponiveis||[]}:m);
+      let nc=s.cars.filter(c=>c.proprietarioId!==id);
+      if(form.possuiCarro) nc=[...nc,{id:uuid(),proprietarioId:id,modelo:form.modelo}];
+      const hols=getHolidaysForRange(s.config.semesterStart,s.config.semesterEnd);
+      const classDates=generateClassDates(s.config.semesterStart,s.config.semesterEnd,s.config.classDays,hols,s.config.skipHolidays!==false);
+      const result=generateSchedule(classDates,nm,nc,s.config.taxaViagem,s.events);
+      return {...s,members:nm,cars:nc,events:result.events,compensations:result.compensations,history:[...(s.history||[]),...pushHistory("edit_member",`${form.nome} editado(a)`)]};
+    });
+    showToast("Membro atualizado!");
+  }
+
+  function handleRemoveMember(id) {
+    const nome=members.find(m=>m.id===id)?.nome||"?";
+    setState(s=>{
+      const nm=s.members.filter(m=>m.id!==id); const nc=s.cars.filter(c=>c.proprietarioId!==id);
+      const today=dateStr(new Date());
+      const cleaned=s.events.map(e=>{ if(e.data<today) return e; const u={...e}; if(u.pilotoId===id) u.pilotoId=null; u.passageiros=(u.passageiros||[]).filter(p=>p!==id); return u; });
+      const hols=getHolidaysForRange(s.config.semesterStart,s.config.semesterEnd);
+      const classDates=generateClassDates(s.config.semesterStart,s.config.semesterEnd,s.config.classDays,hols,s.config.skipHolidays!==false);
+      const result=generateSchedule(classDates,nm,nc,s.config.taxaViagem,cleaned);
+      return {...s,members:nm,cars:nc,events:result.events,compensations:result.compensations,history:[...(s.history||[]),...pushHistory("remove_member",`${nome} removido(a)`)]};
+    });
+    showToast("Membro removido.");
+  }
+
+  function handleMarkFalta(date) {
+    setState(s=>{
+      const upd=s.events.map(e=>e.data===date?{...e,status:"falta"}:e);
+      const next=upd.find(e=>e.data>date&&e.status!=="falta");
+      const result=recalcFromDate(next?next.data:date,upd,s.members,s.cars,s.config.taxaViagem);
+      const allComps=result.events.filter(e=>e.compensacao).map(e=>e.compensacao);
+      return {...s,events:result.events,compensations:allComps,history:[...(s.history||[]),...pushHistory("falta",`Falta em ${formatDateShort(date)}`)]};
+    });
+    showToast("Falta registrada e escala recalculada!");
+  }
+
+  function handleCancelFalta(date) {
+    setState(s=>{
+      const upd=s.events.map(e=>e.data===date?{...e,status:"normal"}:e);
+      const result=recalcFromDate(date,upd,s.members,s.cars,s.config.taxaViagem);
+      const allComps=result.events.filter(e=>e.compensacao).map(e=>e.compensacao);
+      return {...s,events:result.events,compensations:allComps,history:[...(s.history||[]),...pushHistory("cancelar_falta",`Falta cancelada em ${formatDateShort(date)}`)]};
+    });
+    showToast("Falta cancelada e escala recalculada!");
+  }
+
+  function handleCarQuebrou(date) {
+    setState(s=>{
+      const ev=s.events.find(e=>e.data===date);
+      if(!ev||!ev.pilotoId) return s;
+      const carUsage=buildCarUsageMap(s.events.filter(e=>e.data!==date),s.cars);
+      const selected=pickBalancedCarOwner({members:s.members,cars:s.cars,carUsage,excludeMemberId:ev.pilotoId});
+      if(!selected){ showToast("Nenhum carro reserva disponivel!","error"); return s; }
+      const comp={id:uuid(),data:date,pagadorId:ev.pilotoId,receptorId:selected.owner.id,valor:s.config.taxaViagem,motivo:"quebrado"};
+      const newEvents=s.events.map(e=>e.data===date?{...e,status:"quebrado",carroId:selected.car.id,compensacao:comp}:e);
+      const newComps=[...s.compensations.filter(c=>c.data!==date||c.motivo!=="quebrado"),comp];
+      const piloto=s.members.find(m=>m.id===ev.pilotoId)?.nome||"?";
+      return {...s,events:newEvents,compensations:newComps,history:[...(s.history||[]),...pushHistory("car_quebrou",`Carro de ${piloto} quebrou em ${formatDateShort(date)}`)]};
+    });
+    showToast("Carro reserva designado!");
+  }
+
+  async function handleExportImage() {
+    if(typeof window.html2canvas !== "function"){
+      showToast("Biblioteca de exportacao nao carregou.", "error");
+      return;
+    }
+
+    const escapeHtml=value=>String(value??"")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/\"/g, "&quot;")
+      .replace(/'/g, "&#39;");
+    const getMemberName=id=>members.find(m=>m.id===id)?.nome||"--";
+    const getCarName=id=>{
+      const car=cars.find(item=>item.id===id);
+      if(!car) return "--";
+      const owner=members.find(member=>member.id===car.proprietarioId)?.nome||"--";
+      return car.modelo ? `${car.modelo} · ${owner}` : `Carro de ${owner}`;
+    };
+    const printableEvents=events
+      .filter(event=>event.status!=="falta")
+      .sort((a,b)=>a.data.localeCompare(b.data));
+    const upcomingEvents=printableEvents
+      .filter(event=>event.data>=today)
+      .slice(0, 8);
+    const balances={};
+    members.forEach(member=>{ balances[member.id]=0; });
+    compensations.forEach(comp=>{
+      balances[comp.pagadorId]=(balances[comp.pagadorId]||0)-comp.valor;
+      balances[comp.receptorId]=(balances[comp.receptorId]||0)+comp.valor;
+    });
+    const balanceCards=members
+      .map(member=>({ nome: member.nome, valor: balances[member.id]||0 }))
+      .sort((a,b)=>Math.abs(b.valor)-Math.abs(a.valor));
+    const debtMap={};
+    compensations.forEach(comp=>{
+      const key=`${comp.pagadorId}>${comp.receptorId}`;
+      debtMap[key]=(debtMap[key]||0)+comp.valor;
+    });
+    const debts=Object.entries(debtMap)
+      .map(([key,valor])=>{
+        const [fromId,toId]=key.split(">");
+        return { de: getMemberName(fromId), para: getMemberName(toId), valor };
+      })
+      .sort((a,b)=>b.valor-a.valor);
+    const totalReceber=balanceCards.filter(item=>item.valor>0).reduce((sum,item)=>sum+item.valor,0);
+    const totalPagar=Math.abs(balanceCards.filter(item=>item.valor<0).reduce((sum,item)=>sum+item.valor,0));
+    const reportMarkup=`
+  <style>
+    .png-export-wrap, .png-export-wrap * { box-sizing: border-box; }
+    .png-export-wrap {
+      width: 1280px;
+      padding: 40px;
+      background: #eef2ff;
+      font-family: Inter, ui-sans-serif, system-ui, sans-serif;
+      color: #172033;
+    }
+    .png-export-sheet {
+      width: 100%;
+      padding: 44px 40px;
+      background: white;
+      border-radius: 32px;
+      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.14);
+    }
+    .png-export-hero {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      align-items: stretch;
+      margin-bottom: 18px;
+    }
+    .png-export-brand {
+      flex: 1;
+      padding: 20px 22px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
+      color: white;
+    }
+    .png-export-brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.14);
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    .png-export-brand h1 {
+      margin: 0;
+      font-size: 28px;
+      line-height: 1.1;
+    }
+    .png-export-brand p {
+      margin: 8px 0 0;
+      color: rgba(255,255,255,0.78);
+      font-size: 12px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+    .png-export-status {
+      width: 250px;
+      border-radius: 24px;
+      padding: 20px;
+      background: #f8fafc;
+      border: 1px solid #dbe4f0;
+    }
+    .png-export-eyebrow {
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #2563eb;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .png-export-status strong {
+      display: block;
+      font-size: 18px;
+      line-height: 1.35;
+      margin-bottom: 10px;
+    }
+    .png-export-muted { color: #64748b; }
+    .png-export-meta { font-size: 12px; line-height: 1.5; }
+    .png-export-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+    .png-export-card {
+      border: 1px solid #dbe4f0;
+      border-radius: 20px;
+      padding: 16px;
+      background: #ffffff;
+    }
+    .png-export-card .value {
+      font-size: 24px;
+      font-weight: 800;
+      margin-top: 6px;
+      color: #0f172a;
+    }
+    .png-export-section {
+      margin-top: 18px;
+    }
+    .png-export-section h2 {
+      margin: 0 0 10px;
+      font-size: 15px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: #334155;
+    }
+    .png-export-list {
+      display: grid;
+      gap: 10px;
+    }
+    .png-export-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+    }
+    .png-export-row strong, .png-export-row b { color: #0f172a; }
+    .png-export-pill {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 4px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      background: #dbeafe;
+      color: #1d4ed8;
+      margin-bottom: 8px;
+    }
+    .png-export-positive { color: #059669; }
+    .png-export-negative { color: #dc2626; }
+    .png-export-empty {
+      padding: 16px;
+      border-radius: 18px;
+      background: #f8fafc;
+      border: 1px dashed #cbd5e1;
+      color: #64748b;
+    }
+    .png-export-two-col {
+      display: grid;
+      grid-template-columns: 1.05fr 0.95fr;
+      gap: 14px;
+      align-items: start;
+    }
+  </style>
+  <div class="png-export-wrap">
+    <div class="png-export-sheet">
+    <div class="hero">
+      <div class="png-export-hero">
+        <div class="png-export-brand">
+        <div class="png-export-brand-mark">CA</div>
+        <h1>Carona Academica</h1>
+        <p>By Leonardo Cardoso</p>
+      </div>
+      <div class="png-export-status">
+        <div class="png-export-eyebrow">Status do dia</div>
+        <strong>${escapeHtml(heroDriver)}</strong>
+        <div class="png-export-meta png-export-muted">Gerado em ${escapeHtml(new Date().toLocaleString("pt-BR"))}</div>
+        <div class="png-export-meta png-export-muted">Periodo: ${escapeHtml(config.semesterStart?formatDate(config.semesterStart):"--")} ate ${escapeHtml(config.semesterEnd?formatDate(config.semesterEnd):"--")}</div>
+      </div>
+    </div>
+
+    <div class="png-export-grid">
+      <div class="png-export-card">
+        <div class="png-export-eyebrow">Membros</div>
+        <div class="value">${members.length}</div>
+      </div>
+      <div class="png-export-card">
+        <div class="png-export-eyebrow">Proximas aulas</div>
+        <div class="value">${upcomingEvents.length}</div>
+      </div>
+      <div class="png-export-card">
+        <div class="png-export-eyebrow">Fluxo financeiro</div>
+        <div class="value">R$ ${(totalReceber||0).toFixed(2)}</div>
+        <div class="png-export-meta png-export-muted">Total a receber / pagar: R$ ${(totalPagar||0).toFixed(2)}</div>
+      </div>
+    </div>
+
+    <div class="png-export-two-col">
+      <div class="png-export-section">
+        <h2>Proximas caronas</h2>
+        <div class="png-export-list">
+          ${upcomingEvents.length ? upcomingEvents.map(event=>`
+            <div class="png-export-row">
+              <div>
+                <div class="png-export-pill">${escapeHtml(formatDate(event.data))}</div>
+                <div><strong>${escapeHtml(getMemberName(event.pilotoId))}</strong></div>
+                <div class="png-export-meta png-export-muted">${escapeHtml(getCarName(event.carroId))}</div>
+              </div>
+              <div class="png-export-meta png-export-muted" style="text-align:right;">
+                <div>${escapeHtml(STATUS_CONFIG[event.status]?.label||"Normal")}</div>
+                <div>${event.compensacao ? `Comp.: R$ ${escapeHtml(event.compensacao.valor.toFixed(2))}` : "Sem compensacao"}</div>
+              </div>
+            </div>
+          `).join("") : `<div class="png-export-empty">Nao ha proximas caronas cadastradas.</div>`}
+        </div>
+      </div>
+
+      <div class="png-export-section">
+        <h2>Saldos por membro</h2>
+        <div class="png-export-list">
+          ${balanceCards.length ? balanceCards.map(item=>`
+            <div class="png-export-row">
+              <div>
+                <strong>${escapeHtml(item.nome)}</strong>
+              </div>
+              <div class="${item.valor > 0 ? "png-export-positive" : item.valor < 0 ? "png-export-negative" : "png-export-muted"}">
+                <b>${item.valor === 0 ? "Zerado" : `R$ ${Math.abs(item.valor).toFixed(2)}`}</b>
+              </div>
+            </div>
+          `).join("") : `<div class="png-export-empty">Nenhum saldo disponivel.</div>`}
+        </div>
+      </div>
+    </div>
+
+    <div class="png-export-section">
+      <h2>Quem deve para quem</h2>
+      <div class="png-export-list">
+        ${debts.length ? debts.map(item=>`
+          <div class="png-export-row">
+            <div>
+              <strong>${escapeHtml(item.de)}</strong>
+              <span class="png-export-muted"> deve para </span>
+              <strong>${escapeHtml(item.para)}</strong>
+            </div>
+            <div><b>R$ ${item.valor.toFixed(2)}</b></div>
+          </div>
+        `).join("") : `<div class="png-export-empty">Nenhuma pendencia financeira no momento.</div>`}
+      </div>
+    </div>
+  </div>
+  </div>`;
+
+    const tempRoot=document.createElement("div");
+    tempRoot.style.position="fixed";
+    tempRoot.style.left="-20000px";
+    tempRoot.style.top="0";
+    tempRoot.style.zIndex="-1";
+    tempRoot.style.pointerEvents="none";
+    tempRoot.innerHTML=reportMarkup;
+    document.body.appendChild(tempRoot);
+
+    try {
+      await new Promise(resolve=>requestAnimationFrame(()=>resolve()));
+      const sheet=tempRoot.querySelector(".png-export-wrap");
+      const canvas=await window.html2canvas(sheet, {
+        backgroundColor: "#eef2ff",
+        scale: 2,
+        useCORS: true,
+      });
+      const link=document.createElement("a");
+      link.href=canvas.toDataURL("image/png");
+      link.download=`carona-academica-${today}.png`;
+      link.click();
+      showToast("PNG gerado com sucesso!");
+    } catch (error) {
+      showToast("Nao foi possivel gerar o PNG.", "error");
+    } finally {
+      tempRoot.remove();
+    }
+  }
+
+  const tabs=[{id:"calendar",label:"Calendario",icon:<IconCalendar/>},{id:"members",label:"Membros",icon:<IconUser/>},{id:"financial",label:"Financeiro",icon:<IconDollar/>},{id:"settings",label:"Config",icon:<IconSettings/>}];
+  const today=dateStr(new Date());
+  const todayEvent=events.find(e=>e.data===today);
+  const nextEvent=events.find(e=>e.data>=today&&e.status==="normal");
+  const heroDriver=todayEvent&&todayEvent.pilotoId
+    ? `Hoje: ${(members.find(m=>m.id===todayEvent.pilotoId)?.nome||"--").split(" ")[0]} dirige`
+    : nextEvent&&nextEvent.pilotoId
+      ? `Proximo: ${(members.find(m=>m.id===nextEvent.pilotoId)?.nome||"--").split(" ")[0]} em ${formatDateShort(nextEvent.data)}`
+      : "Defina o semestre para ver a proxima carona";
+
+  return (
+    <div className="min-h-screen bg-slate-50">
+      <header className="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm no-print">
+        <div className="max-w-2xl mx-auto px-4 py-3 flex items-start justify-between gap-3">
+          <div className="flex items-center gap-3 min-w-0">
+            <div className="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-sm">CA</div>
+            <div className="min-w-0">
+              <div className="flex items-center gap-2 flex-wrap">
+                <h1 className="font-bold text-slate-800 leading-tight">Carona Academica</h1>
+                <span className="text-[11px] uppercase tracking-[0.24em] text-blue-600">By Leonardo Cardoso</span>
+              </div>
+              <p className="text-xs text-slate-400">Rodizio academico com escala, conflitos e financeiro.</p>
+            </div>
+          </div>
+          <div className="shrink-0 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2 text-right shadow-sm">
+            <div className="text-[10px] uppercase tracking-[0.22em] text-blue-600">Status do Dia</div>
+            <div className="text-sm font-semibold text-slate-800">{heroDriver}</div>
+          </div>
+        </div>
+        <div className="max-w-2xl mx-auto px-4 flex border-t border-slate-100">
+          {tabs.map(t=>(<button key={t.id} onClick={()=>setTab(t.id)} className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium transition-colors border-b-2 ${tab===t.id?"border-blue-600 text-blue-600":"border-transparent text-slate-500 hover:text-slate-700"}`}>{t.icon}<span className="hidden sm:inline">{t.label}</span></button>))}
+        </div>
+      </header>
+      <main className="max-w-2xl mx-auto px-4 py-5 print-full">
+        {tab==="calendar"&&<CalendarTab events={events} members={members} cars={cars} config={config} holidays={holidays} onMarkFalta={handleMarkFalta} onCancelFalta={handleCancelFalta} onCarQuebrou={handleCarQuebrou}/>}
+        {tab==="members"&&<MembersTab members={members} cars={cars} onAddMember={handleAddMember} onEditMember={handleEditMember} onRemoveMember={handleRemoveMember}/>}
+        {tab==="financial"&&<FinancialTab members={members} events={events} compensations={compensations} cars={cars} config={config} onExportImage={handleExportImage}/>}
+        {tab==="settings"&&<SettingsTab config={config} history={history} state={state} onSave={handleSaveConfig} onClear={handleClear} onImport={handleImport}/>}
+      </main>
+      {toast&&(<div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl shadow-lg text-sm font-medium text-white no-print ${toast.type==="error"?"bg-red-600":toast.type==="info"?"bg-slate-700":"bg-emerald-600"}`}>{toast.msg}</div>)}
+    </div>
+  );
+}
+
+const root=ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App/>);
+</script>
+</body>
+</html>
