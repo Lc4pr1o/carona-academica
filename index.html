@@ -202,6 +202,11 @@ function pickCarForDate({members,cars,carUsage,scores={},lastCarId=null}) {
   return candidates.sort((a,b)=>a.usage-b.usage||a.ownerScore-b.ownerScore)[0];
 }
 
+function predictPilot(members, date, scores) {
+  const available=members.slice().filter(m=>isMemberAvailable(m,date)).sort((a,b)=>(scores[a.id]||0)-(scores[b.id]||0));
+  return available[0]||null;
+}
+
 function findLastCarId(events) {
   const sorted=[...events].sort((a,b)=>a.data.localeCompare(b.data));
   for(let i=sorted.length-1;i>=0;i--){ const e=sorted[i]; if(e&&e.carroId&&e.status!=="falta"&&e.status!=="vazio") return e.carroId; }
@@ -229,8 +234,7 @@ function generateSchedule(dates, members, cars, taxaViagem, existingEvents=[]) {
   const newEvents=[],compensations=[];
   for(const date of dates){
     if(date<today){ const ex=existingEvents.find(e=>e.data===date); newEvents.push(ex||{id:uuid(),data:date,status:"normal",pilotoId:null,carroId:null,passageiros:[]}); continue; }
-    const available=members.slice().filter(m=>isMemberAvailable(m,date)).sort((a,b)=>(scores[a.id]||0)-(scores[b.id]||0));
-    const pilot=available[0];
+    const pilot=predictPilot(members,date,scores);
     if(!pilot){ newEvents.push({id:uuid(),data:date,status:"vazio",pilotoId:null,carroId:null,passageiros:[]}); continue; }
     let carroId=null,comp=null;
     const sel=pickCarForDate({members,cars,carUsage,scores,lastCarId});
@@ -267,8 +271,7 @@ function recalcFromDate(fromDate, allEvents, members, cars, taxaViagem) {
   allEvents.filter(e=>e.data<fromDate).forEach(e=>{ if(e.pilotoId&&scores[e.pilotoId]!==undefined) scores[e.pilotoId]++; });
   const newFuture=[],newComps=[];
   for(const ev of futureEvents){
-    const available=members.slice().filter(m=>isMemberAvailable(m,ev.data)).sort((a,b)=>(scores[a.id]||0)-(scores[b.id]||0));
-    const pilot=available[0];
+    const pilot=predictPilot(members,ev.data,scores);
     if(!pilot){ newFuture.push({...ev,status:"vazio",pilotoId:null,carroId:null}); continue; }
     let carroId=null,comp=null;
     const sel=pickCarForDate({members,cars,carUsage,scores,lastCarId});
