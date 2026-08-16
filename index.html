@@ -176,12 +176,6 @@ const INITIAL_CARS = [
   { id:"car-edson", proprietarioId:"edson", modelo:"SpaceFox" },
 ];
 
-const INITIAL_STATE = {
-  members:INITIAL_MEMBERS, cars:INITIAL_CARS, events:[],
-  config:{ semesterStart:"", semesterEnd:"", classDays:[3], taxaViagem:8, skipHolidays:true },
-  compensations:[], history:[],
-};
-
 function generateClassDates(start, end, classDays, holidays={}, skipHolidays=true) {
   if (!start||!end||!Array.isArray(classDays)||classDays.length===0) return [];
   const cur=parseDate(start), endDate=parseDate(end);
@@ -241,6 +235,17 @@ function generateSchedule(dates, members, cars, taxaViagem, existingEvents=[]) {
   }
   return {events:[...pastEvents.filter(e=>!newEvents.find(ne=>ne.data===e.data)),...newEvents].sort((a,b)=>a.data.localeCompare(b.data)),compensations};
 }
+
+const INITIAL_CONFIG = { semesterStart:"2026-08-03", semesterEnd:"2026-12-19", classDays:[3], taxaViagem:8, skipHolidays:true };
+const INITIAL_HOLIDAYS = getHolidaysForRange(INITIAL_CONFIG.semesterStart, INITIAL_CONFIG.semesterEnd);
+const INITIAL_CLASS_DATES = generateClassDates(INITIAL_CONFIG.semesterStart, INITIAL_CONFIG.semesterEnd, INITIAL_CONFIG.classDays, INITIAL_HOLIDAYS, INITIAL_CONFIG.skipHolidays);
+const INITIAL_SCHEDULE = generateSchedule(INITIAL_CLASS_DATES, INITIAL_MEMBERS, INITIAL_CARS, INITIAL_CONFIG.taxaViagem, []);
+
+const INITIAL_STATE = {
+  members:INITIAL_MEMBERS, cars:INITIAL_CARS, events:INITIAL_SCHEDULE.events,
+  config:INITIAL_CONFIG,
+  compensations:INITIAL_SCHEDULE.compensations, history:[],
+};
 
 function recalcFromDate(fromDate, allEvents, members, cars, taxaViagem) {
   const today=dateStr(new Date());
