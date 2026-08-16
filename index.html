@@ -191,6 +191,23 @@ function pickBalancedCarOwner({members,cars,carUsage,scores={},excludeMemberId=n
     .filter(Boolean).sort((a,b)=>a.usage-b.usage||a.ownerScore-b.ownerScore)[0]||null;
 }
 
+function pickCarForDate({members,cars,carUsage,scores={},lastCarId=null}) {
+  const owners=members.filter(m=>m.possuiCarro)
+    .map(owner=>{ const car=cars.find(c=>c.proprietarioId===owner.id); return car?{owner,car,usage:carUsage[car.id]||0,ownerScore:scores[owner.id]||0}:null; })
+    .filter(Boolean);
+  if(!owners.length) return null;
+  const distinctCars=new Set(owners.map(o=>o.car.id)).size;
+  const pool=(distinctCars>1&&lastCarId)?owners.filter(o=>o.car.id!==lastCarId):owners;
+  const candidates=pool.length?pool:owners;
+  return candidates.sort((a,b)=>a.usage-b.usage||a.ownerScore-b.ownerScore)[0];
+}
+
+function findLastCarId(events) {
+  const sorted=[...events].sort((a,b)=>a.data.localeCompare(b.data));
+  for(let i=sorted.length-1;i>=0;i--){ const e=sorted[i]; if(e&&e.carroId&&e.status!=="falta"&&e.status!=="vazio") return e.carroId; }
+  return null;
+}
+
 function isMemberAvailable(member, date) {
   if(!member) return false;
   const dow=getDayOfWeek(date);
@@ -207,6 +224,7 @@ function generateSchedule(dates, members, cars, taxaViagem, existingEvents=[]) {
   const today=dateStr(new Date());
   const pastEvents=existingEvents.filter(e=>e.data<today);
   const carUsage=buildCarUsageMap(pastEvents,cars);
+  let lastCarId=findLastCarId(pastEvents);
   pastEvents.forEach(e=>{ if(e.pilotoId&&scores[e.pilotoId]!==undefined) scores[e.pilotoId]++; });
   const newEvents=[],compensations=[];
   for(const date of dates){
@@ -215,10 +233,10 @@ function generateSchedule(dates, members, cars, taxaViagem, existingEvents=[]) {
     const pilot=available[0];
     if(!pilot){ newEvents.push({id:uuid(),data:date,status:"vazio",pilotoId:null,carroId:null,passageiros:[]}); continue; }
     let carroId=null,comp=null;
-    if(pilot.possuiCarro){ const car=cars.find(c=>c.proprietarioId===pilot.id); carroId=car?car.id:null; }
-    else{ const sel=pickBalancedCarOwner({members,cars,carUsage,scores,excludeMemberId:pilot.id}); if(sel){ carroId=sel.car.id; comp={id:uuid(),data:date,pagadorId:pilot.id,receptorId:sel.owner.id,valor:taxaViagem,motivo:"sem-carro"}; } }
+    const sel=pickCarForDate({members,cars,carUsage,scores,lastCarId});
+    if(sel){ carroId=sel.car.id; if(sel.owner.id!==pilot.id){ comp={id:uuid(),data:date,pagadorId:pilot.id,receptorId:sel.owner.id,valor:taxaViagem,motivo:"sem-carro"}; } }
     scores[pilot.id]=(scores[pilot.id]||0)+1;
-    if(carroId) carUsage[carroId]=(carUsage[carroId]||0)+1;
+    if(carroId){ carUsage[carroId]=(carUsage[carroId]||0)+1; lastCarId=carroId; }
     newEvents.push({id:uuid(),data:date,status:"normal",pilotoId:pilot.id,carroId,passageiros:members.filter(m=>m.id!==pilot.id).map(m=>m.id),compensacao:comp||null});
     if(comp) compensations.push(comp);
   }
@@ -228,7 +246,10 @@ function generateSchedule(dates, members, cars, taxaViagem, existingEvents=[]) {
 const INITIAL_CONFIG = { semesterStart:"2026-08-03", semesterEnd:"2026-12-19", classDays:[3], taxaViagem:8, skipHolidays:true };
 const INITIAL_HOLIDAYS = getHolidaysForRange(INITIAL_CONFIG.semesterStart, INITIAL_CONFIG.semesterEnd);
 const INITIAL_CLASS_DATES = generateClassDates(INITIAL_CONFIG.semesterStart, INITIAL_CONFIG.semesterEnd, INITIAL_CONFIG.classDays, INITIAL_HOLIDAYS, INITIAL_CONFIG.skipHolidays);
-const INITIAL_SCHEDULE = generateSchedule(INITIAL_CLASS_DATES, INITIAL_MEMBERS, INITIAL_CARS, INITIAL_CONFIG.taxaViagem, []);
+const SEED_HISTORY = [
+  { id:"seed-2026-08-12", data:"2026-08-12", status:"normal", pilotoId:"igor", carroId:"car-igor", passageiros:["leo","victor","edson"], compensacao:null },
+];
+const INITIAL_SCHEDULE = generateSchedule(INITIAL_CLASS_DATES, INITIAL_MEMBERS, INITIAL_CARS, INITIAL_CONFIG.taxaViagem, SEED_HISTORY);
 
 const INITIAL_STATE = {
   members:INITIAL_MEMBERS, cars:INITIAL_CARS, events:INITIAL_SCHEDULE.events,
@@ -241,6 +262,7 @@ function recalcFromDate(fromDate, allEvents, members, cars, taxaViagem) {
   const pastEvents=allEvents.filter(e=>e.data<fromDate||e.data<today||(e.data>=fromDate&&e.status==="falta"));
   const futureEvents=allEvents.filter(e=>e.data>=fromDate&&e.data>=today&&e.status!=="falta");
   const carUsage=buildCarUsageMap(pastEvents,cars);
+  let lastCarId=findLastCarId(pastEvents);
   const scores={}; members.forEach(m=>{ scores[m.id]=m.scoreDesgaste||0; });
   allEvents.filter(e=>e.data<fromDate).forEach(e=>{ if(e.pilotoId&&scores[e.pilotoId]!==undefined) scores[e.pilotoId]++; });
   const newFuture=[],newComps=[];
@@ -249,10 +271,10 @@ function recalcFromDate(fromDate, allEvents, members, cars, taxaViagem) {
     const pilot=available[0];
     if(!pilot){ newFuture.push({...ev,status:"vazio",pilotoId:null,carroId:null}); continue; }
     let carroId=null,comp=null;
-    if(pilot.possuiCarro){ const car=cars.find(c=>c.proprietarioId===pilot.id); carroId=car?car.id:null; }
-    else{ const sel=pickBalancedCarOwner({members,cars,carUsage,scores,excludeMemberId:pilot.id}); if(sel){ carroId=sel.car.id; comp={id:uuid(),data:ev.data,pagadorId:pilot.id,receptorId:sel.owner.id,valor:taxaViagem,motivo:"sem-carro"}; } }
+    const sel=pickCarForDate({members,cars,carUsage,scores,lastCarId});
+    if(sel){ carroId=sel.car.id; if(sel.owner.id!==pilot.id){ comp={id:uuid(),data:ev.data,pagadorId:pilot.id,receptorId:sel.owner.id,valor:taxaViagem,motivo:"sem-carro"}; } }
     scores[pilot.id]=(scores[pilot.id]||0)+1;
-    if(carroId) carUsage[carroId]=(carUsage[carroId]||0)+1;
+    if(carroId){ carUsage[carroId]=(carUsage[carroId]||0)+1; lastCarId=carroId; }
     newFuture.push({...ev,pilotoId:pilot.id,carroId,passageiros:members.filter(m=>m.id!==pilot.id).map(m=>m.id),compensacao:comp||null});
     if(comp) newComps.push(comp);
   }
