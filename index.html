@@ -4,115 +4,104 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Carona Acadêmica</title>
+  <meta name="description" content="Rodízio acadêmico com escala, conflitos e financeiro." />
+  <meta name="theme-color" content="#05070d" />
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2NCA2NCI+CiAgPGRlZnM+CiAgICA8bGluZWFyR3JhZGllbnQgaWQ9ImciIHgxPSIwIiB5MT0iMCIgeDI9IjEiIHkyPSIxIj4KICAgICAgPHN0b3Agb2Zmc2V0PSIwIiBzdG9wLWNvbG9yPSIjMjJkM2VlIi8+CiAgICAgIDxzdG9wIG9mZnNldD0iMSIgc3RvcC1jb2xvcj0iIzgxOGNmOCIvPgogICAgPC9saW5lYXJHcmFkaWVudD4KICA8L2RlZnM+CiAgPHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiByeD0iMTYiIGZpbGw9IiMwNzBhMTQiLz4KICA8cmVjdCB3aWR0aD0iNjQiIGhlaWdodD0iNjQiIHJ4PSIxNiIgZmlsbD0idXJsKCNnKSIgZmlsbC1vcGFjaXR5PSIwLjkyIi8+CiAgPGcgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMjAsMjApIiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIuNCIgc3Ryb2tlLWxpbmVjYXA9InJvdW5kIiBzdHJva2UtbGluZWpvaW49InJvdW5kIj4KICAgIDxwYXRoIGQ9Ik0yMSAxMmE5IDkgMCAwIDAtOS05IDkuNzUgOS43NSAwIDAgMC02Ljc0IDIuNzRMMyA4Ii8+CiAgICA8cGF0aCBkPSJNMyAzdjVoNSIvPgogICAgPHBhdGggZD0iTTMgMTJhOSA5IDAgMCAwIDkgOSA5Ljc1IDkuNzUgMCAwIDAgNi43NC0yLjc0TDIxIDE2Ii8+CiAgICA8cGF0aCBkPSJNMTYgMTZoNXY1Ii8+CiAgPC9nPgo8L3N2Zz4K" />
+  <link rel="apple-touch-icon" href="data:image/png;base64,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" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=JetBrains+Mono:wght@500;600;700&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script crossorigin src="https://unpkg.com/react@18/umd/react.development.js"></script>
   <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
   <style>
-    body { font-family: "Inter", sans-serif; }
-    body.theme-dark {
-      color-scheme: dark;
+    :root {
+      --bg-0: #05070d;
+      --surface: rgba(15, 20, 36, 0.66);
+      --surface-soft: rgba(255, 255, 255, 0.03);
+      --border-soft: rgba(148, 178, 214, 0.14);
+      --border-strong: rgba(94, 234, 212, 0.32);
+      --cyan: #22d3ee;
+      --violet: #a78bfa;
+      --text-1: #e8eef8;
+      --text-2: #93a3bd;
+      --text-3: #5c6a84;
+      --font-display: "Space Grotesk", ui-sans-serif, system-ui, sans-serif;
+      --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+    }
+    * { -webkit-tap-highlight-color: transparent; }
+    html { color-scheme: dark; }
+    body {
+      font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+      color: var(--text-1);
+      min-height: 100vh;
       background:
-        radial-gradient(circle at top, rgba(59, 130, 246, 0.18), transparent 28%),
-        radial-gradient(circle at 85% 15%, rgba(16, 185, 129, 0.12), transparent 20%),
-        linear-gradient(180deg, #020617 0%, #0f172a 45%, #111827 100%);
-      color: #e2e8f0;
+        radial-gradient(1100px 560px at 12% -8%, rgba(34, 211, 238, 0.14), transparent 60%),
+        radial-gradient(1000px 520px at 100% 0%, rgba(167, 139, 250, 0.12), transparent 55%),
+        radial-gradient(900px 520px at 50% 115%, rgba(52, 211, 153, 0.07), transparent 60%),
+        linear-gradient(180deg, #03040a 0%, #070a15 45%, #0a0e1c 100%);
+      background-attachment: fixed;
+      position: relative;
     }
-    body.theme-dark .bg-slate-50 { background-color: rgba(15, 23, 42, 0.86) !important; }
-    body.theme-dark .bg-slate-100 { background-color: rgba(30, 41, 59, 0.78) !important; }
-    body.theme-dark .bg-slate-200 { background-color: rgba(51, 65, 85, 0.92) !important; }
-    body.theme-dark .bg-white {
-      background-color: rgba(15, 23, 42, 0.74) !important;
-      backdrop-filter: blur(18px);
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 0;
+      pointer-events: none;
+      background-image:
+        linear-gradient(rgba(148, 178, 214, 0.05) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(148, 178, 214, 0.05) 1px, transparent 1px);
+      background-size: 42px 42px;
+      -webkit-mask-image: radial-gradient(circle at 25% 0%, black, transparent 72%);
+      mask-image: radial-gradient(circle at 25% 0%, black, transparent 72%);
     }
-    body.theme-dark .border-slate-50 { border-color: rgba(30, 41, 59, 0.5) !important; }
-    body.theme-dark .border-slate-100 { border-color: rgba(51, 65, 85, 0.72) !important; }
-    body.theme-dark .border-slate-200 { border-color: rgba(71, 85, 105, 0.85) !important; }
-    body.theme-dark .text-slate-800 { color: #f8fafc !important; }
-    body.theme-dark .text-slate-700 { color: #e2e8f0 !important; }
-    body.theme-dark .text-slate-600 { color: #cbd5e1 !important; }
-    body.theme-dark .text-slate-500 { color: #94a3b8 !important; }
-    body.theme-dark .text-slate-400 { color: #64748b !important; }
-    body.theme-dark .bg-blue-50 { background-color: rgba(29, 78, 216, 0.18) !important; }
-    body.theme-dark .bg-blue-100 { background-color: rgba(37, 99, 235, 0.28) !important; }
-    body.theme-dark .bg-emerald-50 { background-color: rgba(5, 150, 105, 0.16) !important; }
-    body.theme-dark .bg-emerald-100 { background-color: rgba(5, 150, 105, 0.24) !important; }
-    body.theme-dark .bg-amber-50 { background-color: rgba(217, 119, 6, 0.16) !important; }
-    body.theme-dark .bg-amber-100 { background-color: rgba(217, 119, 6, 0.24) !important; }
-    body.theme-dark .bg-red-50 { background-color: rgba(220, 38, 38, 0.14) !important; }
-    body.theme-dark .bg-red-100 { background-color: rgba(220, 38, 38, 0.24) !important; }
-    body.theme-dark .bg-violet-50 { background-color: rgba(124, 58, 237, 0.16) !important; }
-    body.theme-dark .bg-violet-100 { background-color: rgba(124, 58, 237, 0.24) !important; }
-    body.theme-dark .bg-rose-50 { background-color: rgba(225, 29, 72, 0.14) !important; }
-    body.theme-dark .bg-rose-100 { background-color: rgba(225, 29, 72, 0.22) !important; }
-    body.theme-dark .text-blue-700 { color: #93c5fd !important; }
-    body.theme-dark .text-blue-600 { color: #60a5fa !important; }
-    body.theme-dark .text-emerald-700 { color: #6ee7b7 !important; }
-    body.theme-dark .text-emerald-600 { color: #34d399 !important; }
-    body.theme-dark .text-amber-700 { color: #fbbf24 !important; }
-    body.theme-dark .text-amber-600 { color: #f59e0b !important; }
-    body.theme-dark .text-red-700 { color: #fca5a5 !important; }
-    body.theme-dark .text-red-600 { color: #f87171 !important; }
-    body.theme-dark .text-violet-700 { color: #c4b5fd !important; }
-    body.theme-dark .text-violet-600 { color: #a78bfa !important; }
-    body.theme-dark .text-rose-700 { color: #fda4af !important; }
-    body.theme-dark .text-rose-600 { color: #fb7185 !important; }
-    body.theme-dark .shadow-sm { box-shadow: 0 18px 45px rgba(2, 6, 23, 0.22) !important; }
-    body.theme-dark .hover\:bg-slate-50:hover { background-color: rgba(30, 41, 59, 0.62) !important; }
-    body.theme-dark .hover\:bg-slate-100:hover { background-color: rgba(51, 65, 85, 0.86) !important; }
-    body.theme-dark .hover\:bg-slate-200:hover { background-color: rgba(71, 85, 105, 0.86) !important; }
-    body.theme-dark .hover\:bg-blue-100:hover { background-color: rgba(37, 99, 235, 0.34) !important; }
-    body.theme-dark .hover\:bg-emerald-100:hover { background-color: rgba(5, 150, 105, 0.3) !important; }
-    body.theme-dark .hover\:bg-red-50:hover { background-color: rgba(220, 38, 38, 0.2) !important; }
-    body.theme-dark .hover\:bg-red-100:hover { background-color: rgba(220, 38, 38, 0.3) !important; }
-    body.theme-dark .hover\:bg-amber-100:hover { background-color: rgba(217, 119, 6, 0.3) !important; }
-    .scrollbar-thin::-webkit-scrollbar { width: 4px; }
-    .scrollbar-thin::-webkit-scrollbar-track { background: rgba(30, 41, 59, 0.45); }
-    .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(148, 163, 184, 0.65); border-radius: 999px; }
+    #root { position: relative; z-index: 1; }
+    h1, h2, h3, .font-display { font-family: var(--font-display); letter-spacing: -0.01em; }
+    .font-mono { font-family: var(--font-mono); font-variant-numeric: tabular-nums; }
+    .glass {
+      background: var(--surface);
+      backdrop-filter: blur(20px) saturate(140%);
+      -webkit-backdrop-filter: blur(20px) saturate(140%);
+      border: 1px solid var(--border-soft);
+    }
+    .glass-hover { transition: border-color .2s ease, box-shadow .2s ease, transform .15s ease; }
+    .glass-hover:hover { border-color: var(--border-strong); box-shadow: 0 12px 32px -16px rgba(34, 211, 238, 0.28); }
+    .text-muted { color: var(--text-2); }
+    .text-faint { color: var(--text-3); }
+    .chip { display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--border-soft); background: var(--surface-soft); color: var(--text-2); }
+    .chip-cyan { color: #67e8f9; border-color: rgba(34, 211, 238, 0.35); background: rgba(34, 211, 238, 0.08); }
+    .chip-emerald { color: #6ee7b7; border-color: rgba(52, 211, 153, 0.35); background: rgba(52, 211, 153, 0.08); }
+    .chip-amber { color: #fcd34d; border-color: rgba(251, 191, 36, 0.35); background: rgba(251, 191, 36, 0.08); }
+    .chip-rose { color: #fda4af; border-color: rgba(251, 113, 133, 0.35); background: rgba(251, 113, 133, 0.08); }
+    .chip-violet { color: #c4b5fd; border-color: rgba(167, 139, 250, 0.35); background: rgba(167, 139, 250, 0.08); }
+    .dot-glow { box-shadow: 0 0 8px currentColor; }
+    .btn-primary { background: linear-gradient(135deg, #22d3ee, #818cf8); color: #04050a; font-weight: 700; box-shadow: 0 10px 28px -10px rgba(34, 211, 238, 0.55); transition: filter .15s ease, transform .15s ease; }
+    .btn-primary:hover { filter: brightness(1.08); }
+    .btn-primary:active { transform: scale(0.98); }
+    .btn-ghost { background: rgba(255, 255, 255, 0.04); border: 1px solid var(--border-soft); color: var(--text-1); transition: background .15s ease, border-color .15s ease; }
+    .btn-ghost:hover { background: rgba(255, 255, 255, 0.08); border-color: var(--border-strong); }
+    .input-tech { background: rgba(255, 255, 255, 0.03); border: 1px solid var(--border-soft); color: var(--text-1); transition: border-color .15s ease, box-shadow .15s ease; }
+    .input-tech::placeholder { color: var(--text-3); }
+    .input-tech:focus { outline: none; border-color: var(--cyan); box-shadow: 0 0 0 3px rgba(34, 211, 238, 0.15); }
+    .scrollbar-thin::-webkit-scrollbar { width: 5px; height: 5px; }
+    .scrollbar-thin::-webkit-scrollbar-track { background: transparent; }
+    .scrollbar-thin::-webkit-scrollbar-thumb { background: rgba(148, 178, 214, 0.35); border-radius: 999px; }
+    @keyframes pulse-glow { 0%, 100% { opacity: 1; } 50% { opacity: .5; } }
+    .animate-pulse-glow { animation: pulse-glow 2.2s ease-in-out infinite; }
     @media print {
-      body { background: white; }
-      body.theme-dark,
-      body.theme-dark .bg-slate-50,
-      body.theme-dark .bg-slate-100,
-      body.theme-dark .bg-white,
-      body.theme-dark .bg-blue-50,
-      body.theme-dark .bg-emerald-50,
-      body.theme-dark .bg-amber-50,
-      body.theme-dark .bg-red-50,
-      body.theme-dark .bg-violet-50,
-      body.theme-dark .bg-rose-50 {
-        background: white !important;
-        color: #0f172a !important;
-        box-shadow: none !important;
-        backdrop-filter: none !important;
-      }
-      body.theme-dark .text-slate-800,
-      body.theme-dark .text-slate-700,
-      body.theme-dark .text-slate-600,
-      body.theme-dark .text-slate-500,
-      body.theme-dark .text-slate-400,
-      body.theme-dark .text-blue-700,
-      body.theme-dark .text-blue-600,
-      body.theme-dark .text-emerald-700,
-      body.theme-dark .text-emerald-600,
-      body.theme-dark .text-amber-700,
-      body.theme-dark .text-amber-600,
-      body.theme-dark .text-red-700,
-      body.theme-dark .text-red-600,
-      body.theme-dark .text-violet-700,
-      body.theme-dark .text-violet-600,
-      body.theme-dark .text-rose-700,
-      body.theme-dark .text-rose-600 { color: #0f172a !important; }
-      body.theme-dark .border-slate-100,
-      body.theme-dark .border-slate-200,
-      body.theme-dark .border-slate-50 { border-color: #e2e8f0 !important; }
+      body { background: white; color: #0f172a; }
+      body::before { display: none; }
+      .glass { background: #ffffff !important; border-color: #e2e8f0 !important; backdrop-filter: none !important; box-shadow: none !important; }
+      .text-muted, .text-faint { color: #475569 !important; }
       .no-print { display: none !important; }
       .print-full { max-width: 100% !important; padding: 0 !important; }
     }
   </style>
 </head>
-<body class="theme-dark bg-slate-50 min-h-screen">
+<body class="min-h-screen">
 <div id="root"></div>
 <script type="text/babel">
 const { useState, useEffect, useMemo, useRef } = React;
@@ -331,26 +320,29 @@ const IconAlert=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="
 const IconHistory=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>);
 const IconPrinter=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="6 9 6 2 18 2 18 9"/><path d="M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="8"/></svg>);
 const IconCheck=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="20 6 9 17 4 12"/></svg>);
+const IconSync=({className})=>(<svg className={className} xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 12a9 9 0 0 0-9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/><path d="M3 12a9 9 0 0 0 9 9 9.75 9.75 0 0 0 6.74-2.74L21 16"/><path d="M16 16h5v5"/></svg>);
+const IconUsers=({className,width=16,height=16})=>(<svg className={className} xmlns="http://www.w3.org/2000/svg" width={width} height={height} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>);
+const IconZap=()=>(<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>);
 
 const STATUS_CONFIG={
-  normal:{label:"Normal",bg:"bg-emerald-100",text:"text-emerald-800",dot:"bg-emerald-500"},
-  falta:{label:"Falta",bg:"bg-red-100",text:"text-red-800",dot:"bg-red-500"},
-  quebrado:{label:"Carro Quebrado",bg:"bg-amber-100",text:"text-amber-800",dot:"bg-amber-500"},
-  vazio:{label:"Sem Aula",bg:"bg-slate-100",text:"text-slate-500",dot:"bg-slate-400"},
+  normal:{label:"Normal",bg:"bg-emerald-500/15 border border-emerald-500/30",text:"text-emerald-300",dot:"bg-emerald-400"},
+  falta:{label:"Falta",bg:"bg-rose-500/15 border border-rose-500/30",text:"text-rose-300",dot:"bg-rose-400"},
+  quebrado:{label:"Carro Quebrado",bg:"bg-amber-500/15 border border-amber-500/30",text:"text-amber-300",dot:"bg-amber-400"},
+  vazio:{label:"Sem Aula",bg:"bg-white/5 border border-white/10",text:"text-slate-400",dot:"bg-slate-500"},
 };
 const DAY_NAMES=["Dom","Seg","Ter","Qua","Qui","Sex","Sab"];
 const DAY_NAMES_FULL=["Domingo","Segunda","Terca","Quarta","Quinta","Sexta","Sabado"];
 const MONTH_NAMES=["Janeiro","Fevereiro","Marco","Abril","Maio","Junho","Julho","Agosto","Setembro","Outubro","Novembro","Dezembro"];
-const MEMBER_COLORS=["bg-violet-500","bg-blue-500","bg-emerald-500","bg-pink-500","bg-amber-500","bg-cyan-500","bg-rose-500","bg-indigo-500"];
+const MEMBER_COLORS=["bg-violet-500","bg-cyan-500","bg-emerald-500","bg-pink-500","bg-amber-500","bg-sky-500","bg-rose-500","bg-indigo-500"];
 function getMemberColor(i) { return MEMBER_COLORS[i%MEMBER_COLORS.length]; }
 
 function Modal({title,onClose,children,wide=false}) {
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 p-4">
-      <div className={`bg-white rounded-2xl shadow-2xl w-full ${wide?"max-w-2xl":"max-w-md"} max-h-[90vh] overflow-y-auto`}>
-        <div className="flex items-center justify-between p-5 border-b border-slate-100">
-          <h2 className="text-lg font-semibold text-slate-800">{title}</h2>
-          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-500 transition-colors"><IconX/></button>
+    <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+      <div className={`glass rounded-2xl shadow-2xl shadow-black/50 w-full ${wide?"max-w-2xl":"max-w-md"} max-h-[90vh] overflow-y-auto scrollbar-thin`}>
+        <div className="flex items-center justify-between p-5 border-b border-white/10">
+          <h2 className="text-lg font-semibold font-display text-slate-100">{title}</h2>
+          <button onClick={onClose} className="p-1.5 rounded-lg hover:bg-white/10 text-slate-400 hover:text-slate-200 transition-colors"><IconX/></button>
         </div>
         <div className="p-5">{children}</div>
       </div>
@@ -372,8 +364,8 @@ function AlertasBanner({events,members}) {
   },[events,members,today]);
   if(!alertas.length) return null;
   return (
-    <div className="flex flex-col gap-1.5 p-3 bg-amber-50 border border-amber-200 rounded-2xl">
-      {alertas.map((a,i)=>(<div key={i} className="flex items-center gap-2 text-sm text-amber-700"><IconAlert/>{a}</div>))}
+    <div className="flex flex-col gap-1.5 p-3 glass rounded-2xl !border-amber-500/30 bg-amber-500/[0.06]">
+      {alertas.map((a,i)=>(<div key={i} className="flex items-center gap-2 text-sm text-amber-300"><IconAlert/>{a}</div>))}
     </div>
   );
 }
@@ -402,9 +394,9 @@ function CalendarTab({events,members,cars,config,holidays,onMarkFalta,onCancelFa
     const first=new Date(viewDate.year,mi,1),last=new Date(viewDate.year,mi+1,0);
     const md=[]; for(let i=0;i<first.getDay();i++) md.push(null); for(let d=1;d<=last.getDate();d++) md.push(d);
     return (
-      <div key={`mini-${mi}`} className="bg-white rounded-xl border border-slate-100 p-2.5">
-        <h3 className="text-xs font-bold text-slate-700 mb-1.5 uppercase tracking-wide">{MONTH_NAMES[mi]}</h3>
-        <div className="grid grid-cols-7 mb-1">{DAY_NAMES.map(n=>(<div key={`${mi}-${n}`} className="text-[9px] text-center text-slate-400">{n[0]}</div>))}</div>
+      <div key={`mini-${mi}`} className="glass glass-hover rounded-xl p-2.5">
+        <h3 className="text-xs font-bold font-display text-slate-300 mb-1.5 uppercase tracking-wide">{MONTH_NAMES[mi]}</h3>
+        <div className="grid grid-cols-7 mb-1">{DAY_NAMES.map(n=>(<div key={`${mi}-${n}`} className="text-[9px] text-center text-faint">{n[0]}</div>))}</div>
         <div className="grid grid-cols-7 gap-px">
           {md.map((d,idx)=>{
             if(!d) return <div key={`e-${mi}-${idx}`} className="h-5"/>;
@@ -412,11 +404,11 @@ function CalendarTab({events,members,cars,config,holidays,onMarkFalta,onCancelFa
             const ev=eventMap[full]; const cfg=ev?STATUS_CONFIG[ev.status]:null;
             const isHol=holidays[full]; const isBound=full===config.semesterStart||full===config.semesterEnd;
             const classDay=config.classDays&&config.classDays.includes(getDayOfWeek(full));
-            let cls="text-slate-400";
-            if(isHol) cls="bg-rose-100 text-rose-700";
+            let cls="text-faint";
+            if(isHol) cls="bg-rose-500/15 text-rose-300";
             else if(cfg) cls=`${cfg.bg} ${cfg.text}`;
-            else if(isBound) cls="bg-amber-100 text-amber-800";
-            else if(classDay&&inSem(full)) cls="bg-emerald-50 text-emerald-700";
+            else if(isBound) cls="bg-amber-500/15 text-amber-300";
+            else if(classDay&&inSem(full)) cls="bg-cyan-500/10 text-cyan-300";
             return <button key={full} onClick={()=>ev&&setSelectedEvent(ev)} className={`h-5 text-[10px] rounded ${ev?"cursor-pointer hover:opacity-70":""} ${cls}`} title={isHol?holidays[full]:formatDate(full)}>{d}</button>;
           })}
         </div>
@@ -429,38 +421,38 @@ function CalendarTab({events,members,cars,config,holidays,onMarkFalta,onCancelFa
     <div className="space-y-4">
       <AlertasBanner events={events} members={members}/>
       <div className="flex flex-wrap items-center justify-between gap-2">
-        <div className="inline-flex rounded-xl bg-slate-100 p-1">
-          <button onClick={()=>setViewMode("month")} className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${viewMode==="month"?"bg-white text-slate-700 shadow-sm":"text-slate-500"}`}>Mensal</button>
-          <button onClick={()=>setViewMode("year")} className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${viewMode==="year"?"bg-white text-slate-700 shadow-sm":"text-slate-500"}`}>Anual</button>
+        <div className="inline-flex rounded-xl glass p-1">
+          <button onClick={()=>setViewMode("month")} className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${viewMode==="month"?"btn-primary":"text-slate-400 hover:text-slate-200"}`}>Mensal</button>
+          <button onClick={()=>setViewMode("year")} className={`px-3 py-1 rounded-lg text-xs font-semibold transition-colors ${viewMode==="year"?"btn-primary":"text-slate-400 hover:text-slate-200"}`}>Anual</button>
         </div>
         <div className="flex flex-wrap gap-2 text-xs">
-          {Object.entries(STATUS_CONFIG).map(([k,v])=>(<div key={k} className="flex items-center gap-1"><span className={`w-2 h-2 rounded-full ${v.dot}`}/><span className="text-slate-600">{v.label}</span></div>))}
-          <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full bg-rose-400"/><span className="text-slate-600">Feriado</span></div>
+          {Object.entries(STATUS_CONFIG).map(([k,v])=>(<div key={k} className="flex items-center gap-1"><span className={`w-2 h-2 rounded-full dot-glow ${v.dot}`}/><span className="text-muted">{v.label}</span></div>))}
+          <div className="flex items-center gap-1"><span className="w-2 h-2 rounded-full dot-glow bg-rose-400"/><span className="text-muted">Feriado</span></div>
         </div>
       </div>
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 overflow-hidden">
-        <div className="flex items-center justify-between px-5 py-4 border-b border-slate-100">
-          <button onClick={viewMode==="month"?prevMonth:prevYear} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
-          <h2 className="font-semibold text-slate-800">{viewMode==="month"?`${MONTH_NAMES[viewDate.month]} ${viewDate.year}`:viewDate.year}</h2>
-          <button onClick={viewMode==="month"?nextMonth:nextYear} className="p-1.5 rounded-lg hover:bg-slate-100 text-slate-600 transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
+      <div className="glass rounded-2xl overflow-hidden">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-white/10">
+          <button onClick={viewMode==="month"?prevMonth:prevYear} className="p-1.5 rounded-lg btn-ghost transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="15 18 9 12 15 6"/></svg></button>
+          <h2 className="font-semibold font-display text-slate-100">{viewMode==="month"?`${MONTH_NAMES[viewDate.month]} ${viewDate.year}`:viewDate.year}</h2>
+          <button onClick={viewMode==="month"?nextMonth:nextYear} className="p-1.5 rounded-lg btn-ghost transition-colors"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><polyline points="9 18 15 12 9 6"/></svg></button>
         </div>
         {viewMode==="month"?(
           <>
-            <div className="grid grid-cols-7 border-b border-slate-100">{DAY_NAMES.map(d=>(<div key={d} className="text-center py-2 text-xs font-medium text-slate-500">{d}</div>))}</div>
+            <div className="grid grid-cols-7 border-b border-white/10">{DAY_NAMES.map(d=>(<div key={d} className="text-center py-2 text-xs font-medium text-faint">{d}</div>))}</div>
             <div className="grid grid-cols-7">
               {days.map((date,i)=>{
-                if(!date) return <div key={`pad-${i}`} className="h-16 border-b border-r border-slate-50"/>;
+                if(!date) return <div key={`pad-${i}`} className="h-16 border-b border-r border-white/5"/>;
                 const evD=eventMap[date]; const isToday=date===today; const cfg=evD?STATUS_CONFIG[evD.status]:null;
                 const isHol=holidays[date]; const pilotIdx=evD?.pilotoId?gi(evD.pilotoId):-1;
                 return (
                   <div key={date} onClick={()=>evD&&setSelectedEvent(evD)}
-                    className={`h-16 border-b border-r border-slate-50 p-1 ${evD?"cursor-pointer hover:opacity-80 transition-opacity":""} ${isToday?"ring-2 ring-inset ring-blue-400":""} ${isHol?"bg-rose-50":cfg?cfg.bg:""}`}>
-                    <div className={`text-xs font-medium mb-0.5 ${isToday?"text-blue-600":isHol?"text-rose-600":cfg?cfg.text:"text-slate-400"}`}>{parseDate(date).getDate()}</div>
-                    {isHol&&<div className="text-[8px] text-rose-500 leading-tight truncate">{holidays[date]}</div>}
+                    className={`h-16 border-b border-r border-white/5 p-1 ${evD?"cursor-pointer hover:opacity-80 transition-opacity":""} ${isToday?"ring-2 ring-inset ring-cyan-400/70":""} ${isHol?"bg-rose-500/10":cfg?cfg.bg:""}`}>
+                    <div className={`text-xs font-medium mb-0.5 font-mono ${isToday?"text-cyan-300":isHol?"text-rose-300":cfg?cfg.text:"text-faint"}`}>{parseDate(date).getDate()}</div>
+                    {isHol&&<div className="text-[8px] text-rose-400 leading-tight truncate">{holidays[date]}</div>}
                     {evD&&evD.status!=="vazio"&&!isHol&&(
                       <div className="space-y-0.5">
-                        {evD.pilotoId&&<div className={`text-[9px] font-semibold truncate px-1 rounded ${pilotIdx>=0?getMemberColor(pilotIdx):"bg-slate-400"} text-white`}>{gn(evD.pilotoId).split(" ")[0]}</div>}
-                        {evD.compensacao&&<div className="text-[9px] text-amber-700 font-medium">R${evD.compensacao.valor}</div>}
+                        {evD.pilotoId&&<div className={`text-[9px] font-semibold truncate px-1 rounded ${pilotIdx>=0?getMemberColor(pilotIdx):"bg-slate-500"} text-white`}>{gn(evD.pilotoId).split(" ")[0]}</div>}
+                        {evD.compensacao&&<div className="text-[9px] text-amber-300 font-medium font-mono">R${evD.compensacao.valor}</div>}
                       </div>
                     )}
                   </div>
@@ -469,41 +461,41 @@ function CalendarTab({events,members,cars,config,holidays,onMarkFalta,onCancelFa
             </div>
           </>
         ):(
-          <div className="p-4 grid grid-cols-2 lg:grid-cols-3 gap-3 bg-slate-50">{MONTH_NAMES.map((_,mi)=>renderMiniMonth(mi))}</div>
+          <div className="p-4 grid grid-cols-2 lg:grid-cols-3 gap-3">{MONTH_NAMES.map((_,mi)=>renderMiniMonth(mi))}</div>
         )}
       </div>
       {ev&&!ev._holiday&&(
         <Modal title={`${formatDate(ev.data)} - ${DAY_NAMES_FULL[getDayOfWeek(ev.data)]}`} onClose={()=>setSelectedEvent(null)}>
           <div className="space-y-4">
             <div className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium ${STATUS_CONFIG[ev.status]?.bg} ${STATUS_CONFIG[ev.status]?.text}`}>
-              <span className={`w-2 h-2 rounded-full ${STATUS_CONFIG[ev.status]?.dot}`}/>{STATUS_CONFIG[ev.status]?.label}
+              <span className={`w-2 h-2 rounded-full dot-glow ${STATUS_CONFIG[ev.status]?.dot}`}/>{STATUS_CONFIG[ev.status]?.label}
             </div>
             {ev.status!=="vazio"&&(
               <div className="space-y-3">
-                <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
+                <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold ${getMemberColor(gi(ev.pilotoId))}`}>{gn(ev.pilotoId)[0]}</div>
-                  <div><div className="text-xs text-slate-500">Piloto</div><div className="font-semibold text-slate-800">{gn(ev.pilotoId)}</div></div>
+                  <div><div className="text-xs text-faint">Piloto</div><div className="font-semibold text-slate-100">{gn(ev.pilotoId)}</div></div>
                 </div>
-                {ev.carroId&&(<div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl"><div className="w-8 h-8 rounded-full flex items-center justify-center bg-slate-200 text-slate-600"><IconCar/></div><div><div className="text-xs text-slate-500">Veiculo</div><div className="font-semibold text-slate-800">{gc(ev.carroId)}</div></div></div>)}
-                {ev.passageiros?.length>0&&(<div className="p-3 bg-slate-50 rounded-xl"><div className="text-xs text-slate-500 mb-2">Passageiros</div><div className="flex flex-wrap gap-1.5">{ev.passageiros.map(pid=>(<span key={pid} className="text-xs bg-white border border-slate-200 rounded-full px-2 py-0.5 text-slate-700">{gn(pid)}</span>))}</div></div>)}
-                {ev.compensacao&&(<div className="p-3 bg-amber-50 border border-amber-200 rounded-xl"><div className="text-xs text-amber-700 font-medium mb-1">{ev.compensacao.motivo==="sem-carro"?"Taxa de uso de veiculo":"Compensacao carro reserva"}</div><div className="text-sm text-amber-800"><strong>{gn(ev.compensacao.pagadorId)}</strong> deve pagar <strong>R${ev.compensacao.valor}</strong> para <strong>{gn(ev.compensacao.receptorId)}</strong></div></div>)}
+                {ev.carroId&&(<div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5"><div className="w-8 h-8 rounded-full flex items-center justify-center bg-white/10 text-slate-300"><IconCar/></div><div><div className="text-xs text-faint">Veiculo</div><div className="font-semibold text-slate-100">{gc(ev.carroId)}</div></div></div>)}
+                {ev.passageiros?.length>0&&(<div className="p-3 rounded-xl bg-white/[0.03] border border-white/5"><div className="text-xs text-faint mb-2">Passageiros</div><div className="flex flex-wrap gap-1.5">{ev.passageiros.map(pid=>(<span key={pid} className="text-xs chip rounded-full px-2 py-0.5">{gn(pid)}</span>))}</div></div>)}
+                {ev.compensacao&&(<div className="p-3 rounded-xl bg-amber-500/10 border border-amber-500/30"><div className="text-xs text-amber-300 font-medium mb-1">{ev.compensacao.motivo==="sem-carro"?"Taxa de uso de veiculo":"Compensacao carro reserva"}</div><div className="text-sm text-amber-100"><strong>{gn(ev.compensacao.pagadorId)}</strong> deve pagar <strong className="font-mono">R${ev.compensacao.valor}</strong> para <strong>{gn(ev.compensacao.receptorId)}</strong></div></div>)}
               </div>
             )}
             {isFuture&&ev.status==="falta"&&(
-              <div className="pt-2 border-t border-slate-100 space-y-2">
-                <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Acoes Rapidas</p>
-                <button onClick={()=>{onCancelFalta(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-sm font-medium transition-colors"><IconCheck/>Cancelar falta e recalcular</button>
+              <div className="pt-2 border-t border-white/10 space-y-2">
+                <p className="text-xs text-faint font-medium uppercase tracking-wide">Acoes Rapidas</p>
+                <button onClick={()=>{onCancelFalta(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 rounded-xl text-sm font-medium transition-colors"><IconCheck/>Cancelar falta e recalcular</button>
               </div>
             )}
             {isFuture&&ev.status!=="falta"&&(
-              <div className="pt-2 border-t border-slate-100 space-y-2">
-                <p className="text-xs text-slate-500 font-medium uppercase tracking-wide">Acoes Rapidas</p>
-                <button onClick={()=>{onMarkFalta(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-red-50 hover:bg-red-100 text-red-700 rounded-xl text-sm font-medium transition-colors">
+              <div className="pt-2 border-t border-white/10 space-y-2">
+                <p className="text-xs text-faint font-medium uppercase tracking-wide">Acoes Rapidas</p>
+                <button onClick={()=>{onMarkFalta(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-rose-500/10 hover:bg-rose-500/20 border border-rose-500/30 text-rose-300 rounded-xl text-sm font-medium transition-colors">
                   <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>
                   Nao vou hoje (recalcular escala)
                 </button>
                 {ev.pilotoId&&members.find(m=>m.id===ev.pilotoId)?.possuiCarro&&(
-                  <button onClick={()=>{onCarQuebrou(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-amber-50 hover:bg-amber-100 text-amber-700 rounded-xl text-sm font-medium transition-colors">
+                  <button onClick={()=>{onCarQuebrou(ev.data);setSelectedEvent(null);}} className="w-full flex items-center gap-2 px-4 py-3 bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 rounded-xl text-sm font-medium transition-colors">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3-3a1 1 0 0 0 0-1.4l-1.6-1.6a1 1 0 0 0-1.4 0l-3 3z"/><path d="M8.3 14.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l1.4-1.4"/><line x1="2" y1="2" x2="22" y2="22"/></svg>
                     Meu carro quebrou (trocar veiculo)
                   </button>
@@ -535,29 +527,29 @@ function MembersTab({members,cars,onAddMember,onEditMember,onRemoveMember}) {
   return (
     <div className="space-y-4">
       <div className="flex items-center justify-between">
-        <h2 className="font-semibold text-slate-700">Membros do Grupo</h2>
-        <button onClick={openAdd} className="flex items-center gap-1.5 px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors"><IconPlus/>Adicionar</button>
+        <h2 className="font-semibold font-display text-slate-200">Membros do Grupo</h2>
+        <button onClick={openAdd} className="flex items-center gap-1.5 px-3 py-1.5 btn-primary rounded-xl text-sm"><IconPlus/>Adicionar</button>
       </div>
-      {members.length===0?(<div className="text-center py-12 text-slate-400"><div className="text-4xl mb-3">👥</div><p>Nenhum membro cadastrado.</p></div>):(
+      {members.length===0?(<div className="text-center py-12 text-faint"><IconUsers className="mx-auto mb-3 opacity-40" width="40" height="40"/><p>Nenhum membro cadastrado.</p></div>):(
         <div className="space-y-2">
           {members.map((m,i)=>{
             const car=cars.find(c=>c.proprietarioId===m.id);
             const dowCount=m.diasDisponiveis?.length||7;
             return (
-              <div key={m.id} className="flex items-center gap-3 p-4 bg-white rounded-2xl shadow-sm border border-slate-100">
+              <div key={m.id} className="flex items-center gap-3 p-4 glass glass-hover rounded-2xl">
                 <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold ${getMemberColor(i)}`}>{m.nome[0]?.toUpperCase()}</div>
                 <div className="flex-1 min-w-0">
-                  <div className="font-semibold text-slate-800 truncate">{m.nome}</div>
-                  <div className="flex flex-wrap items-center gap-2 mt-0.5">
-                    <span className={`text-xs px-2 py-0.5 rounded-full ${m.possuiCarro?"bg-emerald-100 text-emerald-700":"bg-slate-100 text-slate-500"}`}>{m.possuiCarro?`Carro: ${car?.modelo||"sim"}`:"Sem carro"}</span>
-                    <span className="text-xs text-slate-500">Score: {m.scoreDesgaste}</span>
-                    {dowCount<7&&<span className="text-xs text-violet-600 bg-violet-50 px-2 py-0.5 rounded-full">{dowCount} dias/sem.</span>}
-                    {(m.datasIndisponiveis?.length||0)>0&&<span className="text-xs text-red-500 bg-red-50 px-2 py-0.5 rounded-full">{m.datasIndisponiveis.length} data(s) bloq.</span>}
+                  <div className="font-semibold text-slate-100 truncate">{m.nome}</div>
+                  <div className="flex flex-wrap items-center gap-2 mt-1">
+                    <span className={`chip rounded-full px-2 py-0.5 ${m.possuiCarro?"chip-emerald":""}`}>{m.possuiCarro?`Carro: ${car?.modelo||"sim"}`:"Sem carro"}</span>
+                    <span className="text-xs text-faint font-mono">Score: {m.scoreDesgaste}</span>
+                    {dowCount<7&&<span className="chip chip-violet rounded-full px-2 py-0.5">{dowCount} dias/sem.</span>}
+                    {(m.datasIndisponiveis?.length||0)>0&&<span className="chip chip-rose rounded-full px-2 py-0.5">{m.datasIndisponiveis.length} data(s) bloq.</span>}
                   </div>
                 </div>
                 <div className="flex gap-1">
-                  <button onClick={()=>openEdit(m)} className="p-2 rounded-lg hover:bg-slate-100 text-slate-500 transition-colors"><IconEdit/></button>
-                  <button onClick={()=>onRemoveMember(m.id)} className="p-2 rounded-lg hover:bg-red-50 text-red-400 hover:text-red-600 transition-colors"><IconTrash/></button>
+                  <button onClick={()=>openEdit(m)} className="p-2 rounded-lg btn-ghost transition-colors"><IconEdit/></button>
+                  <button onClick={()=>onRemoveMember(m.id)} className="p-2 rounded-lg btn-ghost hover:!border-rose-500/40 hover:!text-rose-300 text-slate-400 transition-colors"><IconTrash/></button>
                 </div>
               </div>
             );
@@ -568,34 +560,34 @@ function MembersTab({members,cars,onAddMember,onEditMember,onRemoveMember}) {
         <Modal title={editId?"Editar Membro":"Novo Membro"} onClose={()=>setShowForm(false)} wide>
           <div className="space-y-4">
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-1">Nome *</label>
-              <input value={form.nome} onChange={e=>setForm(f=>({...f,nome:e.target.value}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Nome completo"/>
+              <label className="block text-sm font-medium text-slate-300 mb-1">Nome *</label>
+              <input value={form.nome} onChange={e=>setForm(f=>({...f,nome:e.target.value}))} className="w-full input-tech rounded-xl px-3 py-2 text-sm" placeholder="Nome completo"/>
             </div>
-            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-              <input type="checkbox" id="possuiCarro" checked={form.possuiCarro} onChange={e=>setForm(f=>({...f,possuiCarro:e.target.checked}))} className="w-4 h-4 rounded accent-blue-600"/>
-              <label htmlFor="possuiCarro" className="text-sm font-medium text-slate-700">Possui carro proprio</label>
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+              <input type="checkbox" id="possuiCarro" checked={form.possuiCarro} onChange={e=>setForm(f=>({...f,possuiCarro:e.target.checked}))} className="w-4 h-4 rounded accent-cyan-400"/>
+              <label htmlFor="possuiCarro" className="text-sm font-medium text-slate-300">Possui carro proprio</label>
             </div>
-            {form.possuiCarro&&(<div><label className="block text-sm font-medium text-slate-700 mb-1">Modelo do carro</label><input value={form.modelo} onChange={e=>setForm(f=>({...f,modelo:e.target.value}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400" placeholder="Ex: Honda Civic"/></div>)}
+            {form.possuiCarro&&(<div><label className="block text-sm font-medium text-slate-300 mb-1">Modelo do carro</label><input value={form.modelo} onChange={e=>setForm(f=>({...f,modelo:e.target.value}))} className="w-full input-tech rounded-xl px-3 py-2 text-sm" placeholder="Ex: Honda Civic"/></div>)}
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Dias disponiveis para dirigir</label>
-              <div className="flex gap-1.5">{DAY_NAMES.map((n,d)=>(<button key={d} type="button" onClick={()=>toggleDow(d)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-colors ${form.diasDisponiveis.includes(d)?"bg-blue-600 text-white":"bg-slate-100 text-slate-400"}`}>{n}</button>))}</div>
-              {form.diasDisponiveis.length===0&&<p className="text-xs text-red-500 mt-1">Atencao: membro sem nenhum dia disponivel.</p>}
+              <label className="block text-sm font-medium text-slate-300 mb-2">Dias disponiveis para dirigir</label>
+              <div className="flex gap-1.5">{DAY_NAMES.map((n,d)=>(<button key={d} type="button" onClick={()=>toggleDow(d)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-colors ${form.diasDisponiveis.includes(d)?"btn-primary":"btn-ghost text-slate-400"}`}>{n}</button>))}</div>
+              {form.diasDisponiveis.length===0&&<p className="text-xs text-rose-400 mt-1">Atencao: membro sem nenhum dia disponivel.</p>}
             </div>
             <div>
-              <label className="block text-sm font-medium text-slate-700 mb-2">Datas indisponiveis (especificas)</label>
+              <label className="block text-sm font-medium text-slate-300 mb-2">Datas indisponiveis (especificas)</label>
               <div className="flex gap-2">
-                <input type="date" value={newDateIndisp} onChange={e=>setNewDateIndisp(e.target.value)} className="flex-1 border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
-                <button type="button" onClick={addDateIndisp} className="px-3 py-2 bg-slate-100 hover:bg-slate-200 text-slate-600 rounded-xl text-sm font-medium transition-colors"><IconPlus/></button>
+                <input type="date" value={newDateIndisp} onChange={e=>setNewDateIndisp(e.target.value)} className="flex-1 input-tech rounded-xl px-3 py-2 text-sm"/>
+                <button type="button" onClick={addDateIndisp} className="px-3 py-2 btn-ghost rounded-xl text-sm font-medium transition-colors"><IconPlus/></button>
               </div>
               {form.datasIndisponiveis.length>0&&(
                 <div className="flex flex-wrap gap-1.5 mt-2">
-                  {form.datasIndisponiveis.map(dt=>(<span key={dt} className="inline-flex items-center gap-1 text-xs bg-red-50 text-red-600 border border-red-200 rounded-full px-2 py-0.5">{formatDateShort(dt)}<button type="button" onClick={()=>removeDateIndisp(dt)} className="hover:text-red-800"><IconX/></button></span>))}
+                  {form.datasIndisponiveis.map(dt=>(<span key={dt} className="inline-flex items-center gap-1 text-xs chip chip-rose rounded-full px-2 py-0.5">{formatDateShort(dt)}<button type="button" onClick={()=>removeDateIndisp(dt)} className="hover:text-rose-100"><IconX/></button></span>))}
                 </div>
               )}
             </div>
             <div className="flex gap-2 pt-2">
-              <button onClick={()=>setShowForm(false)} className="flex-1 px-4 py-2 border border-slate-200 rounded-xl text-sm font-medium text-slate-600 hover:bg-slate-50 transition-colors">Cancelar</button>
-              <button onClick={handleSubmit} className="flex-1 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-xl text-sm font-medium transition-colors">Salvar</button>
+              <button onClick={()=>setShowForm(false)} className="flex-1 px-4 py-2 btn-ghost rounded-xl text-sm font-medium transition-colors">Cancelar</button>
+              <button onClick={handleSubmit} className="flex-1 px-4 py-2 btn-primary rounded-xl text-sm">Salvar</button>
             </div>
           </div>
         </Modal>
@@ -627,58 +619,58 @@ function FinancialTab({members,events,compensations,cars,config,onExportImage}) 
   const gi=id=>members.findIndex(m=>m.id===id);
   return (
     <div className="space-y-5">
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-        <h3 className="font-semibold text-slate-800 mb-3">Simulador de Justica</h3>
-        {members.length<2?(<p className="text-slate-400 text-sm">Adicione pelo menos 2 membros.</p>):(
+      <div className="glass rounded-2xl p-5">
+        <h3 className="font-semibold font-display text-slate-100 mb-3">Simulador de Justica</h3>
+        {members.length<2?(<p className="text-faint text-sm">Adicione pelo menos 2 membros.</p>):(
           <div className="space-y-3">
-            <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${stats.fairness<1?"bg-emerald-500":stats.fairness<3?"bg-amber-500":"bg-red-500"}`}>{stats.fairness<1?"OK":stats.fairness<3?"~":"!"}</div>
+            <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+              <div className={`w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm ${stats.fairness<1?"bg-emerald-500":stats.fairness<3?"bg-amber-500":"bg-rose-500"}`}>{stats.fairness<1?"OK":stats.fairness<3?"~":"!"}</div>
               <div>
-                <div className="font-semibold text-slate-800">Desvio padrao: {stats.fairness.toFixed(2)} viagens</div>
-                <div className="text-xs text-slate-500">{stats.fairness<1?"Escala muito equilibrada":stats.fairness<3?"Leve desequilibrio - aceitavel":"Desequilibrio significativo - considere regenerar"}</div>
+                <div className="font-semibold text-slate-100 font-mono">Desvio padrao: {stats.fairness.toFixed(2)} viagens</div>
+                <div className="text-xs text-faint">{stats.fairness<1?"Escala muito equilibrada":stats.fairness<3?"Leve desequilibrio - aceitavel":"Desequilibrio significativo - considere regenerar"}</div>
               </div>
             </div>
             <div className="grid grid-cols-2 gap-2">
-              <div className="p-3 bg-blue-50 rounded-xl text-center"><div className="font-bold text-blue-700 text-lg">{stats.totalFuture}</div><div className="text-blue-600 text-xs">aulas futuras</div></div>
-              <div className="p-3 bg-violet-50 rounded-xl text-center"><div className="font-bold text-violet-700 text-lg">{members.length>0?(stats.totalFuture/members.length).toFixed(1):0}</div><div className="text-violet-600 text-xs">aulas/pessoa</div></div>
+              <div className="p-3 rounded-xl bg-cyan-500/10 border border-cyan-500/20 text-center"><div className="font-bold text-cyan-300 text-lg font-mono">{stats.totalFuture}</div><div className="text-cyan-400/80 text-xs">aulas futuras</div></div>
+              <div className="p-3 rounded-xl bg-violet-500/10 border border-violet-500/20 text-center"><div className="font-bold text-violet-300 text-lg font-mono">{members.length>0?(stats.totalFuture/members.length).toFixed(1):0}</div><div className="text-violet-400/80 text-xs">aulas/pessoa</div></div>
             </div>
-            {cars.length>1&&(<div>{cars.map(c=>{ const o=members.find(m=>m.id===c.proprietarioId); const cnt=stats.carCounts[c.id]||0; const maxC=Math.max(...Object.values(stats.carCounts),1); return (<div key={c.id} className="mb-2"><div className="flex justify-between text-xs mb-0.5"><span className="text-slate-600">{c.modelo||`Carro de ${o?.nome||"?"}`}</span><span className="text-slate-500">{cnt}x</span></div><div className="w-full h-2 bg-slate-100 rounded-full overflow-hidden"><div className="h-full rounded-full bg-blue-400" style={{width:`${(cnt/maxC)*100}%`}}/></div></div>); })}</div>)}
+            {cars.length>1&&(<div>{cars.map(c=>{ const o=members.find(m=>m.id===c.proprietarioId); const cnt=stats.carCounts[c.id]||0; const maxC=Math.max(...Object.values(stats.carCounts),1); return (<div key={c.id} className="mb-2"><div className="flex justify-between text-xs mb-0.5"><span className="text-muted">{c.modelo||`Carro de ${o?.nome||"?"}`}</span><span className="text-faint font-mono">{cnt}x</span></div><div className="w-full h-2 bg-white/5 rounded-full overflow-hidden"><div className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-violet-400" style={{width:`${(cnt/maxC)*100}%`}}/></div></div>); })}</div>)}
           </div>
         )}
       </div>
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-        <h3 className="font-semibold text-slate-800 mb-4">Distribuicao de Viagens</h3>
-        {members.length===0?(<p className="text-slate-400 text-sm text-center py-4">Nenhum membro.</p>):(
+      <div className="glass rounded-2xl p-5">
+        <h3 className="font-semibold font-display text-slate-100 mb-4">Distribuicao de Viagens</h3>
+        {members.length===0?(<p className="text-faint text-sm text-center py-4">Nenhum membro.</p>):(
           <div className="space-y-3">
-            {members.map((m,i)=>{ const count=stats.driveCounts[m.id]||0; const pct=maxDrives>0?(count/maxDrives)*100:0; return (<div key={m.id}><div className="flex items-center justify-between mb-1"><span className="text-sm text-slate-700 font-medium">{m.nome}</span><span className="text-sm text-slate-500">{count} viagem{count!==1?"s":""}</span></div><div className="w-full h-3 bg-slate-100 rounded-full overflow-hidden"><div className={`h-full rounded-full transition-all ${getMemberColor(i)}`} style={{width:`${pct}%`}}/></div></div>); })}
+            {members.map((m,i)=>{ const count=stats.driveCounts[m.id]||0; const pct=maxDrives>0?(count/maxDrives)*100:0; return (<div key={m.id}><div className="flex items-center justify-between mb-1"><span className="text-sm text-slate-300 font-medium">{m.nome}</span><span className="text-sm text-faint font-mono">{count} viagem{count!==1?"s":""}</span></div><div className="w-full h-3 bg-white/5 rounded-full overflow-hidden"><div className={`h-full rounded-full transition-all ${getMemberColor(i)}`} style={{width:`${pct}%`}}/></div></div>); })}
           </div>
         )}
       </div>
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-        <h3 className="font-semibold text-slate-800 mb-4">Saldo Financeiro</h3>
-        {members.length===0?(<p className="text-slate-400 text-sm text-center py-4">Nenhum membro.</p>):(
+      <div className="glass rounded-2xl p-5">
+        <h3 className="font-semibold font-display text-slate-100 mb-4">Saldo Financeiro</h3>
+        {members.length===0?(<p className="text-faint text-sm text-center py-4">Nenhum membro.</p>):(
           <div className="space-y-2">
-            {members.map((m,i)=>{ const bal=stats.balances[m.id]||0; return (<div key={m.id} className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl"><div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold ${getMemberColor(i)}`}>{m.nome[0]}</div><span className="flex-1 text-sm font-medium text-slate-700">{m.nome}</span><span className={`text-sm font-bold ${bal>0?"text-emerald-600":bal<0?"text-red-600":"text-slate-400"}`}>{bal!==0?`R$${Math.abs(bal).toFixed(2)}`:"Zerado"}</span>{bal>0&&<span className="text-xs text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">a receber</span>}{bal<0&&<span className="text-xs text-red-600 bg-red-50 px-2 py-0.5 rounded-full">a pagar</span>}</div>); })}
+            {members.map((m,i)=>{ const bal=stats.balances[m.id]||0; return (<div key={m.id} className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5"><div className={`w-8 h-8 rounded-full flex items-center justify-center text-white text-sm font-bold ${getMemberColor(i)}`}>{m.nome[0]}</div><span className="flex-1 text-sm font-medium text-slate-300">{m.nome}</span><span className={`text-sm font-bold font-mono ${bal>0?"text-emerald-400":bal<0?"text-rose-400":"text-faint"}`}>{bal!==0?`R$${Math.abs(bal).toFixed(2)}`:"Zerado"}</span>{bal>0&&<span className="chip chip-emerald rounded-full px-2 py-0.5">a receber</span>}{bal<0&&<span className="chip chip-rose rounded-full px-2 py-0.5">a pagar</span>}</div>); })}
           </div>
         )}
       </div>
       {compensations.length>0&&(
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-          <h3 className="font-semibold text-slate-800 mb-4">Quem Deve Para Quem</h3>
-          {(()=>{ const owes={}; compensations.forEach(c=>{ const k=`${c.pagadorId}>${c.receptorId}`; owes[k]=(owes[k]||0)+c.valor; }); return Object.entries(owes).map(([key,val])=>{ const [fromId,toId]=key.split(">"); return (<div key={key} className="flex items-center gap-2 p-3 bg-slate-50 rounded-xl mb-2 text-sm"><span className="font-medium text-red-600">{gn(fromId)}</span><span className="text-slate-400">deve</span><span className="font-bold text-slate-800">R${val.toFixed(2)}</span><span className="text-slate-400">para</span><span className="font-medium text-emerald-600">{gn(toId)}</span></div>); }); })()}
+        <div className="glass rounded-2xl p-5">
+          <h3 className="font-semibold font-display text-slate-100 mb-4">Quem Deve Para Quem</h3>
+          {(()=>{ const owes={}; compensations.forEach(c=>{ const k=`${c.pagadorId}>${c.receptorId}`; owes[k]=(owes[k]||0)+c.valor; }); return Object.entries(owes).map(([key,val])=>{ const [fromId,toId]=key.split(">"); return (<div key={key} className="flex items-center gap-2 p-3 rounded-xl bg-white/[0.03] border border-white/5 mb-2 text-sm"><span className="font-medium text-rose-300">{gn(fromId)}</span><span className="text-faint">deve</span><span className="font-bold text-slate-100 font-mono">R${val.toFixed(2)}</span><span className="text-faint">para</span><span className="font-medium text-emerald-300">{gn(toId)}</span></div>); }); })()}
         </div>
       )}
-      <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-        <h3 className="font-semibold text-slate-800 mb-4">Log de Compensacoes</h3>
-        {compensations.length===0?(<p className="text-slate-400 text-sm text-center py-4">Nenhuma compensacao.</p>):(
+      <div className="glass rounded-2xl p-5">
+        <h3 className="font-semibold font-display text-slate-100 mb-4">Log de Compensacoes</h3>
+        {compensations.length===0?(<p className="text-faint text-sm text-center py-4">Nenhuma compensacao.</p>):(
           <div className="space-y-2 max-h-64 overflow-y-auto scrollbar-thin">
-            {[...compensations].sort((a,b)=>a.data.localeCompare(b.data)).map(c=>(<div key={c.id} className={`p-3 rounded-xl border text-sm ${c.motivo==="quebrado"?"bg-amber-50 border-amber-200":"bg-blue-50 border-blue-200"}`}><div className="flex items-center justify-between"><span className="font-medium text-slate-700">{formatDateShort(c.data)}</span><span className={`font-bold ${c.motivo==="quebrado"?"text-amber-700":"text-blue-700"}`}>R${c.valor}</span></div><div className="text-slate-600 mt-0.5"><strong>{gn(c.pagadorId)}</strong> {"→"} <strong>{gn(c.receptorId)}</strong></div><div className="text-xs text-slate-400 mt-0.5">{c.motivo==="quebrado"?"Carro reserva (quebrado)":"Uso de veiculo (sem carro)"}</div></div>))}
+            {[...compensations].sort((a,b)=>a.data.localeCompare(b.data)).map(c=>(<div key={c.id} className={`p-3 rounded-xl border text-sm ${c.motivo==="quebrado"?"bg-amber-500/10 border-amber-500/25":"bg-cyan-500/10 border-cyan-500/25"}`}><div className="flex items-center justify-between"><span className="font-medium text-slate-300">{formatDateShort(c.data)}</span><span className={`font-bold font-mono ${c.motivo==="quebrado"?"text-amber-300":"text-cyan-300"}`}>R${c.valor}</span></div><div className="text-muted mt-0.5"><strong className="text-slate-200">{gn(c.pagadorId)}</strong> {"→"} <strong className="text-slate-200">{gn(c.receptorId)}</strong></div><div className="text-xs text-faint mt-0.5">{c.motivo==="quebrado"?"Carro reserva (quebrado)":"Uso de veiculo (sem carro)"}</div></div>))}
           </div>
         )}
       </div>
       <div className="flex gap-2">
-        <button onClick={()=>exportCSV(events,members,cars)} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl text-sm font-medium transition-colors"><IconDownload/>Exportar CSV</button>
-        <button onClick={onExportImage} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl text-sm font-medium transition-colors"><IconDownload/>Exportar PNG</button>
+        <button onClick={()=>exportCSV(events,members,cars)} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 rounded-xl text-sm font-medium transition-colors"><IconDownload/>Exportar CSV</button>
+        <button onClick={onExportImage} className="flex-1 flex items-center justify-center gap-2 px-4 py-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 rounded-xl text-sm font-medium transition-colors"><IconDownload/>Exportar PNG</button>
       </div>
     </div>
   );
@@ -692,72 +684,72 @@ function SettingsTab({config,history,state,onSave,onClear,onImport}) {
   function handleImportFile(e) { const file=e.target.files[0]; if(!file) return; const r=new FileReader(); r.onload=ev=>{ try { const data=JSON.parse(ev.target.result); onImport(data); } catch { alert("Arquivo invalido."); } }; r.readAsText(file); e.target.value=""; }
   const holidays=useMemo(()=>getHolidaysForRange(form.semesterStart,form.semesterEnd),[form.semesterStart,form.semesterEnd]);
   const holsInSem=useMemo(()=>Object.entries(holidays).filter(([d])=>d>=form.semesterStart&&d<=form.semesterEnd).sort(),[holidays,form.semesterStart,form.semesterEnd]);
-  const historyTypes={config:{label:"Configuracao",color:"text-blue-600",bg:"bg-blue-50"},falta:{label:"Falta",color:"text-red-600",bg:"bg-red-50"},cancelar_falta:{label:"Falta cancelada",color:"text-emerald-600",bg:"bg-emerald-50"},car_quebrou:{label:"Carro quebrou",color:"text-amber-600",bg:"bg-amber-50"},add_member:{label:"Membro adicionado",color:"text-violet-600",bg:"bg-violet-50"},remove_member:{label:"Membro removido",color:"text-rose-600",bg:"bg-rose-50"},edit_member:{label:"Membro editado",color:"text-slate-600",bg:"bg-slate-50"}};
+  const historyTypes={config:{label:"Configuracao",color:"text-cyan-300",bg:"bg-cyan-500/10"},falta:{label:"Falta",color:"text-rose-300",bg:"bg-rose-500/10"},cancelar_falta:{label:"Falta cancelada",color:"text-emerald-300",bg:"bg-emerald-500/10"},car_quebrou:{label:"Carro quebrou",color:"text-amber-300",bg:"bg-amber-500/10"},add_member:{label:"Membro adicionado",color:"text-violet-300",bg:"bg-violet-500/10"},remove_member:{label:"Membro removido",color:"text-rose-300",bg:"bg-rose-500/10"},edit_member:{label:"Membro editado",color:"text-slate-300",bg:"bg-white/5"}};
   const sections=[{id:"semester",label:"Semestre"},{id:"backup",label:"Backup"},{id:"history",label:"Historico"},{id:"danger",label:"Perigo"}];
   return (
     <div className="space-y-4">
-      <div className="flex gap-1 bg-slate-100 p-1 rounded-xl">
-        {sections.map(s=>(<button key={s.id} onClick={()=>setActiveSection(s.id)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeSection===s.id?"bg-white text-slate-700 shadow-sm":"text-slate-500"}`}>{s.label}</button>))}
+      <div className="flex gap-1 glass p-1 rounded-xl">
+        {sections.map(s=>(<button key={s.id} onClick={()=>setActiveSection(s.id)} className={`flex-1 py-1.5 rounded-lg text-xs font-semibold transition-colors ${activeSection===s.id?"btn-primary":"text-slate-400 hover:text-slate-200"}`}>{s.label}</button>))}
       </div>
       {activeSection==="semester"&&(
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 space-y-5">
-          <h3 className="font-semibold text-slate-800">Configuracoes do Semestre</h3>
+        <div className="glass rounded-2xl p-5 space-y-5">
+          <h3 className="font-semibold font-display text-slate-100">Configuracoes do Semestre</h3>
           <div className="grid grid-cols-2 gap-4">
-            <div><label className="block text-sm font-medium text-slate-700 mb-1">Data de Inicio</label><input type="date" value={form.semesterStart} onChange={e=>setForm(f=>({...f,semesterStart:e.target.value}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/></div>
-            <div><label className="block text-sm font-medium text-slate-700 mb-1">Data de Fim</label><input type="date" value={form.semesterEnd} onChange={e=>setForm(f=>({...f,semesterEnd:e.target.value}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/></div>
+            <div><label className="block text-sm font-medium text-slate-300 mb-1">Data de Inicio</label><input type="date" value={form.semesterStart} onChange={e=>setForm(f=>({...f,semesterStart:e.target.value}))} className="w-full input-tech rounded-xl px-3 py-2 text-sm"/></div>
+            <div><label className="block text-sm font-medium text-slate-300 mb-1">Data de Fim</label><input type="date" value={form.semesterEnd} onChange={e=>setForm(f=>({...f,semesterEnd:e.target.value}))} className="w-full input-tech rounded-xl px-3 py-2 text-sm"/></div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-2">Dias de Aula</label>
-            <div className="flex gap-1.5">{DAY_NAMES.map((name,d)=>(<button key={d} onClick={()=>toggleDay(d)} className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-colors ${form.classDays.includes(d)?"bg-blue-600 text-white":"bg-slate-100 text-slate-500 hover:bg-slate-200"}`}>{name}</button>))}</div>
+            <label className="block text-sm font-medium text-slate-300 mb-2">Dias de Aula</label>
+            <div className="flex gap-1.5">{DAY_NAMES.map((name,d)=>(<button key={d} onClick={()=>toggleDay(d)} className={`flex-1 py-2 rounded-xl text-xs font-semibold transition-colors ${form.classDays.includes(d)?"btn-primary":"btn-ghost text-slate-400"}`}>{name}</button>))}</div>
           </div>
           <div>
-            <label className="block text-sm font-medium text-slate-700 mb-1">Taxa por Viagem (R$)</label>
-            <input type="number" min="0" step="0.5" value={form.taxaViagem} onChange={e=>setForm(f=>({...f,taxaViagem:parseFloat(e.target.value)||0}))} className="w-full border border-slate-200 rounded-xl px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-400"/>
-            <p className="text-xs text-slate-400 mt-1">Valor cobrado quando alguem usa veiculo de outro membro.</p>
+            <label className="block text-sm font-medium text-slate-300 mb-1">Taxa por Viagem (R$)</label>
+            <input type="number" min="0" step="0.5" value={form.taxaViagem} onChange={e=>setForm(f=>({...f,taxaViagem:parseFloat(e.target.value)||0}))} className="w-full input-tech rounded-xl px-3 py-2 text-sm font-mono"/>
+            <p className="text-xs text-faint mt-1">Valor cobrado quando alguem usa veiculo de outro membro.</p>
           </div>
-          <div className="flex items-center gap-3 p-3 bg-slate-50 rounded-xl">
-            <input type="checkbox" id="skipHol" checked={form.skipHolidays!==false} onChange={e=>setForm(f=>({...f,skipHolidays:e.target.checked}))} className="w-4 h-4 rounded accent-blue-600"/>
+          <div className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/5">
+            <input type="checkbox" id="skipHol" checked={form.skipHolidays!==false} onChange={e=>setForm(f=>({...f,skipHolidays:e.target.checked}))} className="w-4 h-4 rounded accent-cyan-400"/>
             <div>
-              <label htmlFor="skipHol" className="text-sm font-medium text-slate-700">Pular feriados nacionais automaticamente</label>
-              {form.semesterStart&&form.semesterEnd&&(<p className="text-xs text-slate-400">{holsInSem.length} feriado(s) no periodo</p>)}
+              <label htmlFor="skipHol" className="text-sm font-medium text-slate-300">Pular feriados nacionais automaticamente</label>
+              {form.semesterStart&&form.semesterEnd&&(<p className="text-xs text-faint">{holsInSem.length} feriado(s) no periodo</p>)}
             </div>
           </div>
           {form.skipHolidays!==false&&holsInSem.length>0&&(
-            <div className="p-3 bg-rose-50 border border-rose-200 rounded-xl">
-              <p className="text-xs font-medium text-rose-700 mb-2">Feriados no semestre:</p>
-              <div className="flex flex-wrap gap-1.5">{holsInSem.map(([d,name])=>(<span key={d} className="text-xs bg-white border border-rose-200 text-rose-700 rounded-full px-2 py-0.5">{formatDateShort(d)} {name}</span>))}</div>
+            <div className="p-3 rounded-xl bg-rose-500/10 border border-rose-500/25">
+              <p className="text-xs font-medium text-rose-300 mb-2">Feriados no semestre:</p>
+              <div className="flex flex-wrap gap-1.5">{holsInSem.map(([d,name])=>(<span key={d} className="text-xs chip chip-rose rounded-full px-2 py-0.5">{formatDateShort(d)} {name}</span>))}</div>
             </div>
           )}
-          <button onClick={()=>onSave(form)} className="w-full px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white rounded-xl font-medium transition-colors">Salvar e Regenerar Escala</button>
+          <button onClick={()=>onSave(form)} className="w-full px-4 py-3 btn-primary rounded-xl font-medium">Salvar e Regenerar Escala</button>
         </div>
       )}
       {activeSection==="backup"&&(
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5 space-y-4">
-          <h3 className="font-semibold text-slate-800">Backup e Restauracao</h3>
-          <p className="text-sm text-slate-500">Exporte todos os dados para JSON e restaure quando precisar.</p>
-          <button onClick={()=>exportJSON(state)} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-emerald-50 hover:bg-emerald-100 text-emerald-700 rounded-xl font-medium transition-colors"><IconDownload/>Exportar Backup (JSON)</button>
+        <div className="glass rounded-2xl p-5 space-y-4">
+          <h3 className="font-semibold font-display text-slate-100">Backup e Restauracao</h3>
+          <p className="text-sm text-muted">Exporte todos os dados para JSON e restaure quando precisar.</p>
+          <button onClick={()=>exportJSON(state)} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-emerald-500/10 hover:bg-emerald-500/20 border border-emerald-500/30 text-emerald-300 rounded-xl font-medium transition-colors"><IconDownload/>Exportar Backup (JSON)</button>
           <div>
-            <button onClick={()=>fileRef.current?.click()} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-blue-50 hover:bg-blue-100 text-blue-700 rounded-xl font-medium transition-colors"><IconUpload/>Importar Backup (JSON)</button>
+            <button onClick={()=>fileRef.current?.click()} className="w-full flex items-center justify-center gap-2 px-4 py-3 bg-cyan-500/10 hover:bg-cyan-500/20 border border-cyan-500/30 text-cyan-300 rounded-xl font-medium transition-colors"><IconUpload/>Importar Backup (JSON)</button>
             <input ref={fileRef} type="file" accept=".json" onChange={handleImportFile} className="hidden"/>
-            <p className="text-xs text-slate-400 mt-1 text-center">Atencao: importacao substitui todos os dados atuais.</p>
+            <p className="text-xs text-faint mt-1 text-center">Atencao: importacao substitui todos os dados atuais.</p>
           </div>
         </div>
       )}
       {activeSection==="history"&&(
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-          <div className="flex items-center gap-2 mb-4"><IconHistory/><h3 className="font-semibold text-slate-800">Historico de Alteracoes</h3></div>
-          {(!history||history.length===0)?(<p className="text-slate-400 text-sm text-center py-4">Nenhuma alteracao registrada.</p>):(
+        <div className="glass rounded-2xl p-5">
+          <div className="flex items-center gap-2 mb-4 text-slate-300"><IconHistory/><h3 className="font-semibold font-display text-slate-100">Historico de Alteracoes</h3></div>
+          {(!history||history.length===0)?(<p className="text-faint text-sm text-center py-4">Nenhuma alteracao registrada.</p>):(
             <div className="space-y-2 max-h-96 overflow-y-auto scrollbar-thin">
-              {[...history].reverse().map(h=>{ const ht=historyTypes[h.tipo]||{label:h.tipo,color:"text-slate-600",bg:"bg-slate-50"}; return (<div key={h.id} className={`p-3 rounded-xl ${ht.bg}`}><div className="flex items-center justify-between"><span className={`text-xs font-semibold ${ht.color}`}>{ht.label}</span><span className="text-xs text-slate-400">{new Date(h.timestamp).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</span></div><p className="text-sm text-slate-700 mt-0.5">{h.descricao}</p></div>); })}
+              {[...history].reverse().map(h=>{ const ht=historyTypes[h.tipo]||{label:h.tipo,color:"text-slate-300",bg:"bg-white/5"}; return (<div key={h.id} className={`p-3 rounded-xl border border-white/5 ${ht.bg}`}><div className="flex items-center justify-between"><span className={`text-xs font-semibold ${ht.color}`}>{ht.label}</span><span className="text-xs text-faint font-mono">{new Date(h.timestamp).toLocaleString("pt-BR",{day:"2-digit",month:"2-digit",hour:"2-digit",minute:"2-digit"})}</span></div><p className="text-sm text-slate-300 mt-0.5">{h.descricao}</p></div>); })}
             </div>
           )}
         </div>
       )}
       {activeSection==="danger"&&(
-        <div className="bg-white rounded-2xl shadow-sm border border-slate-100 p-5">
-          <h3 className="font-semibold text-slate-800 mb-2">Zona de Perigo</h3>
-          <p className="text-sm text-slate-500 mb-4">Isso ira apagar todos os dados do app permanentemente.</p>
-          <button onClick={onClear} className="w-full px-4 py-3 bg-red-50 hover:bg-red-100 text-red-600 rounded-xl font-medium transition-colors border border-red-200">Limpar Todos os Dados</button>
+        <div className="glass rounded-2xl p-5">
+          <h3 className="font-semibold font-display text-slate-100 mb-2">Zona de Perigo</h3>
+          <p className="text-sm text-muted mb-4">Isso ira apagar todos os dados do app permanentemente.</p>
+          <button onClick={onClear} className="w-full px-4 py-3 bg-rose-500/10 hover:bg-rose-500/20 text-rose-300 rounded-xl font-medium transition-colors border border-rose-500/30">Limpar Todos os Dados</button>
         </div>
       )}
     </div>
@@ -928,16 +920,20 @@ function App() {
     .png-export-wrap {
       width: 1280px;
       padding: 40px;
-      background: #eef2ff;
+      background:
+        radial-gradient(900px 500px at 10% -10%, rgba(34,211,238,0.16), transparent 60%),
+        radial-gradient(800px 450px at 100% 0%, rgba(167,139,250,0.14), transparent 55%),
+        linear-gradient(180deg, #05070d 0%, #0a0e1c 100%);
       font-family: Inter, ui-sans-serif, system-ui, sans-serif;
-      color: #172033;
+      color: #e8eef8;
     }
     .png-export-sheet {
       width: 100%;
       padding: 44px 40px;
-      background: white;
+      background: rgba(15, 20, 36, 0.75);
+      border: 1px solid rgba(148, 178, 214, 0.16);
       border-radius: 32px;
-      box-shadow: 0 24px 80px rgba(15, 23, 42, 0.14);
+      box-shadow: 0 24px 80px rgba(2, 4, 10, 0.5);
     }
     .png-export-hero {
       display: flex;
@@ -950,8 +946,8 @@ function App() {
       flex: 1;
       padding: 20px 22px;
       border-radius: 24px;
-      background: linear-gradient(135deg, #0f172a 0%, #1d4ed8 100%);
-      color: white;
+      background: linear-gradient(135deg, #22d3ee 0%, #818cf8 100%);
+      color: #04050a;
     }
     .png-export-brand-mark {
       display: inline-flex;
@@ -960,7 +956,7 @@ function App() {
       width: 42px;
       height: 42px;
       border-radius: 14px;
-      background: rgba(255,255,255,0.14);
+      background: rgba(4,5,10,0.18);
       font-weight: 800;
       margin-bottom: 14px;
     }
@@ -968,26 +964,28 @@ function App() {
       margin: 0;
       font-size: 28px;
       line-height: 1.1;
+      font-weight: 800;
     }
     .png-export-brand p {
       margin: 8px 0 0;
-      color: rgba(255,255,255,0.78);
+      color: rgba(4,5,10,0.7);
       font-size: 12px;
       letter-spacing: 0.08em;
       text-transform: uppercase;
+      font-weight: 700;
     }
     .png-export-status {
       width: 250px;
       border-radius: 24px;
       padding: 20px;
-      background: #f8fafc;
-      border: 1px solid #dbe4f0;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(148, 178, 214, 0.16);
     }
     .png-export-eyebrow {
       font-size: 10px;
       letter-spacing: 0.18em;
       text-transform: uppercase;
-      color: #2563eb;
+      color: #67e8f9;
       font-weight: 700;
       margin-bottom: 8px;
     }
@@ -996,8 +994,9 @@ function App() {
       font-size: 18px;
       line-height: 1.35;
       margin-bottom: 10px;
+      color: #e8eef8;
     }
-    .png-export-muted { color: #64748b; }
+    .png-export-muted { color: #93a3bd; }
     .png-export-meta { font-size: 12px; line-height: 1.5; }
     .png-export-grid {
       display: grid;
@@ -1006,16 +1005,16 @@ function App() {
       margin-bottom: 18px;
     }
     .png-export-card {
-      border: 1px solid #dbe4f0;
+      border: 1px solid rgba(148, 178, 214, 0.16);
       border-radius: 20px;
       padding: 16px;
-      background: #ffffff;
+      background: rgba(255,255,255,0.03);
     }
     .png-export-card .value {
       font-size: 24px;
       font-weight: 800;
       margin-top: 6px;
-      color: #0f172a;
+      color: #e8eef8;
     }
     .png-export-section {
       margin-top: 18px;
@@ -1025,7 +1024,7 @@ function App() {
       font-size: 15px;
       text-transform: uppercase;
       letter-spacing: 0.12em;
-      color: #334155;
+      color: #93a3bd;
     }
     .png-export-list {
       display: grid;
@@ -1037,28 +1036,28 @@ function App() {
       gap: 16px;
       padding: 14px 16px;
       border-radius: 18px;
-      background: #f8fafc;
-      border: 1px solid #e2e8f0;
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(148, 178, 214, 0.14);
     }
-    .png-export-row strong, .png-export-row b { color: #0f172a; }
+    .png-export-row strong, .png-export-row b { color: #e8eef8; }
     .png-export-pill {
       display: inline-block;
       border-radius: 999px;
       padding: 4px 10px;
       font-size: 11px;
       font-weight: 700;
-      background: #dbeafe;
-      color: #1d4ed8;
+      background: rgba(34, 211, 238, 0.14);
+      color: #67e8f9;
       margin-bottom: 8px;
     }
-    .png-export-positive { color: #059669; }
-    .png-export-negative { color: #dc2626; }
+    .png-export-positive { color: #6ee7b7; }
+    .png-export-negative { color: #fda4af; }
     .png-export-empty {
       padding: 16px;
       border-radius: 18px;
-      background: #f8fafc;
-      border: 1px dashed #cbd5e1;
-      color: #64748b;
+      background: rgba(255,255,255,0.03);
+      border: 1px dashed rgba(148, 178, 214, 0.25);
+      color: #93a3bd;
     }
     .png-export-two-col {
       display: grid;
@@ -1168,7 +1167,7 @@ function App() {
       await new Promise(resolve=>requestAnimationFrame(()=>resolve()));
       const sheet=tempRoot.querySelector(".png-export-wrap");
       const canvas=await window.html2canvas(sheet, {
-        backgroundColor: "#eef2ff",
+        backgroundColor: "#05070d",
         scale: 2,
         useCORS: true,
       });
@@ -1184,7 +1183,7 @@ function App() {
     }
   }
 
-  const tabs=[{id:"calendar",label:"Calendario",icon:<IconCalendar/>},{id:"members",label:"Membros",icon:<IconUser/>},{id:"financial",label:"Financeiro",icon:<IconDollar/>},{id:"settings",label:"Config",icon:<IconSettings/>}];
+  const tabs=[{id:"calendar",label:"Calendario",icon:<IconCalendar/>},{id:"members",label:"Membros",icon:<IconUsers/>},{id:"financial",label:"Financeiro",icon:<IconDollar/>},{id:"settings",label:"Config",icon:<IconSettings/>}];
   const today=dateStr(new Date());
   const todayEvent=events.find(e=>e.data===today);
   const nextEvent=events.find(e=>e.data>=today&&e.status==="normal");
@@ -1195,26 +1194,26 @@ function App() {
       : "Defina o semestre para ver a proxima carona";
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-100 sticky top-0 z-40 shadow-sm no-print">
+    <div className="min-h-screen">
+      <header className="glass !border-x-0 !border-t-0 sticky top-0 z-40 no-print">
         <div className="max-w-2xl mx-auto px-4 py-3 flex items-start justify-between gap-3">
           <div className="flex items-center gap-3 min-w-0">
-            <div className="w-11 h-11 bg-blue-600 rounded-2xl flex items-center justify-center text-white font-bold text-lg shadow-sm">CA</div>
+            <div className="w-11 h-11 rounded-2xl flex items-center justify-center text-white shadow-sm shrink-0" style={{background:"linear-gradient(135deg, #22d3ee, #818cf8)", boxShadow:"0 8px 24px -8px rgba(34,211,238,0.6)"}}><IconSync/></div>
             <div className="min-w-0">
               <div className="flex items-center gap-2 flex-wrap">
-                <h1 className="font-bold text-slate-800 leading-tight">Carona Academica</h1>
-                <span className="text-[11px] uppercase tracking-[0.24em] text-blue-600">By Leonardo Cardoso</span>
+                <h1 className="font-bold font-display text-slate-100 leading-tight tracking-tight">Carona Academica</h1>
+                <span className="text-[11px] uppercase tracking-[0.24em] text-cyan-400">By Leonardo Cardoso</span>
               </div>
-              <p className="text-xs text-slate-400">Rodizio academico com escala, conflitos e financeiro.</p>
+              <p className="text-xs text-faint">Rodizio academico com escala, conflitos e financeiro.</p>
             </div>
           </div>
-          <div className="shrink-0 rounded-2xl border border-slate-100 bg-slate-50 px-3 py-2 text-right shadow-sm">
-            <div className="text-[10px] uppercase tracking-[0.22em] text-blue-600">Status do Dia</div>
-            <div className="text-sm font-semibold text-slate-800">{heroDriver}</div>
+          <div className="shrink-0 rounded-2xl glass px-3 py-2 text-right">
+            <div className="text-[10px] uppercase tracking-[0.22em] text-cyan-400 flex items-center justify-end gap-1"><span className="w-1.5 h-1.5 rounded-full bg-emerald-400 dot-glow animate-pulse-glow"/>Status do Dia</div>
+            <div className="text-sm font-semibold text-slate-100">{heroDriver}</div>
           </div>
         </div>
-        <div className="max-w-2xl mx-auto px-4 flex border-t border-slate-100">
-          {tabs.map(t=>(<button key={t.id} onClick={()=>setTab(t.id)} className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium transition-colors border-b-2 ${tab===t.id?"border-blue-600 text-blue-600":"border-transparent text-slate-500 hover:text-slate-700"}`}>{t.icon}<span className="hidden sm:inline">{t.label}</span></button>))}
+        <div className="max-w-2xl mx-auto px-4 flex border-t border-white/10">
+          {tabs.map(t=>(<button key={t.id} onClick={()=>setTab(t.id)} className={`flex items-center gap-1.5 px-4 py-2.5 text-sm font-medium transition-colors border-b-2 ${tab===t.id?"border-cyan-400 text-cyan-300":"border-transparent text-slate-500 hover:text-slate-300"}`}>{t.icon}<span className="hidden sm:inline">{t.label}</span></button>))}
         </div>
       </header>
       <main className="max-w-2xl mx-auto px-4 py-5 print-full">
@@ -1223,7 +1222,7 @@ function App() {
         {tab==="financial"&&<FinancialTab members={members} events={events} compensations={compensations} cars={cars} config={config} onExportImage={handleExportImage}/>}
         {tab==="settings"&&<SettingsTab config={config} history={history} state={state} onSave={handleSaveConfig} onClear={handleClear} onImport={handleImport}/>}
       </main>
-      {toast&&(<div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl shadow-lg text-sm font-medium text-white no-print ${toast.type==="error"?"bg-red-600":toast.type==="info"?"bg-slate-700":"bg-emerald-600"}`}>{toast.msg}</div>)}
+      {toast&&(<div className={`fixed bottom-6 left-1/2 -translate-x-1/2 z-50 px-5 py-3 rounded-2xl shadow-lg text-sm font-medium text-white no-print ${toast.type==="error"?"bg-rose-500":toast.type==="info"?"bg-slate-700":"bg-emerald-500"}`}>{toast.msg}</div>)}
     </div>
   );
 }
